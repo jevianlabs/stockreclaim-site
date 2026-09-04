@@ -1,82 +1,109 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../site.config";
-
-const { portalUrl, featurebaseOrg } = site.featureBoard;
-const hasBoard = Boolean(portalUrl || featurebaseOrg);
-const boardHref = portalUrl || (featurebaseOrg ? `https://${featurebaseOrg}.featurebase.app` : "");
+const endpoint = `${site.apiBase}/api/feature-request`;
 ---
 
-<Base title="Feature requests" description="Suggest a feature, vote on ideas, and see what's planned for StockReclaim.">
+<Base title="Feature requests" description="Suggest a feature for StockReclaim. Tell us what would make the returns audit more useful and we'll read every one.">
   <section class="on-teal" style="padding-bottom:40px;">
     <div class="wrap narrow" style="text-align:center;">
       <p class="eyebrow">Feature requests</p>
       <h1>Tell us what to build next.</h1>
       <p class="muted" style="font-size:1.1rem;">
-        Post an idea, vote on what matters to you, and follow it from planned to
-        shipped. The most-wanted requests move up the roadmap.
+        Suggest a feature or tell us what would make the audit more useful. We
+        read every one, and you can leave an email to hear when it ships.
       </p>
-      {hasBoard && (
-        <a class="btn btn-on-teal" href={boardHref} style="margin-top:8px;" target="_blank" rel="noopener">Open the request board</a>
-      )}
     </div>
   </section>
 
   <section style="padding-top:40px;">
     <div class="wrap narrow">
-      {featurebaseOrg ? (
-        <!-- Featurebase inline widget. Loads only when an org slug is configured. -->
-        <div data-featurebase-embed style="min-height:640px;">
-          <div id="featurebase-widget"></div>
-        </div>
-        <script is:inline define:vars={{ featurebaseOrg }}>
-          (function () {
-            const s = document.createElement("script");
-            s.src = "https://do.featurebase.app/js/sdk.js";
-            s.id = "featurebase-sdk";
-            document.head.appendChild(s);
-            window.Featurebase = window.Featurebase || function () {
-              (window.Featurebase.q = window.Featurebase.q || []).push(arguments);
-            };
-            window.Featurebase("embed", {
-              organization: featurebaseOrg,
-              basePath: null,
-              theme: "light",
-              initialPage: "Board",
-            });
-          })();
-        </script>
-      ) : boardHref ? (
-        <div class="card" style="text-align:center;">
-          <h2 style="font-size:1.3rem;">Head to the request board</h2>
-          <p class="muted">Post and vote on ideas over on our public board.</p>
-          <a class="btn btn-primary" href={boardHref} target="_blank" rel="noopener" style="margin-top:8px;">Open the board →</a>
-        </div>
-      ) : (
-        <!-- No board configured yet: fall back to email so the page still works. -->
-        <div class="card">
-          <h2 style="font-size:1.3rem;">Request a feature</h2>
-          <p class="muted">
-            A public voting board is on the way. For now, email your idea and we'll
-            add it — and tell you when it ships.
-          </p>
-          <a class="btn btn-primary" href={`mailto:${site.helloEmail}?subject=Feature%20request`} style="margin-top:8px;">Email a request</a>
-          <p class="muted" style="margin-top:20px; font-size:0.85rem;">
-            <strong>Setup note (remove before launch):</strong> to turn on the
-            embedded board, set <code>featureBoard.featurebaseOrg</code> (Featurebase
-            slug) or <code>featureBoard.portalUrl</code> in
-            <code>src/site.config.ts</code>. Featurebase and Canny both have a free
-            tier; Fider is an open-source self-host option.
-          </p>
-        </div>
-      )}
+      <div class="card">
+        <h2 style="font-size:1.3rem; margin-top:0;">Suggest a feature</h2>
+
+        <form id="fr-form" method="post" action={endpoint} style="display:grid; gap:14px; margin-top:16px;">
+          <label style="display:grid; gap:6px;">
+            <span style="font-weight:600;">Title</span>
+            <input name="title" required maxlength="200" placeholder="e.g. Export exceptions to CSV by date range"
+              style="padding:11px 12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit;" />
+          </label>
+
+          <label style="display:grid; gap:6px;">
+            <span style="font-weight:600;">What would you like, and why?</span>
+            <textarea name="description" required rows="5" maxlength="4000" placeholder="Describe the problem you're trying to solve."
+              style="padding:11px 12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit; resize:vertical;"></textarea>
+          </label>
+
+          <div class="grid grid-2" style="gap:14px;">
+            <label style="display:grid; gap:6px;">
+              <span style="font-weight:600;">Category <span class="muted" style="font-weight:400;">(optional)</span></span>
+              <input name="category" maxlength="80" placeholder="Reporting, Exceptions, Email…"
+                style="padding:11px 12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit;" />
+            </label>
+            <label style="display:grid; gap:6px;">
+              <span style="font-weight:600;">Your email <span class="muted" style="font-weight:400;">(optional)</span></span>
+              <input name="email" type="email" maxlength="200" placeholder="So we can tell you when it ships"
+                style="padding:11px 12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit;" />
+            </label>
+          </div>
+
+          <!-- Honeypot: hidden from people, tempting to bots. Real submissions leave it empty. -->
+          <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" />
+
+          <div>
+            <button class="btn btn-primary" type="submit" id="fr-submit">Submit request</button>
+          </div>
+          <p id="fr-status" role="status" aria-live="polite" style="margin:0;"></p>
+        </form>
+      </div>
+
+      <p class="muted" style="margin-top:16px; font-size:0.92rem;">
+        Prefer email? Write to <a href={`mailto:${site.helloEmail}?subject=Feature%20request`}>{site.helloEmail}</a>.
+      </p>
     </div>
   </section>
 
   <section class="on-teal">
     <div class="wrap narrow" style="text-align:center;">
       <h2>Already shipped?</h2>
-      <p class="muted">Many requests are already live. Check <a href="/changelog/" style="color:#fff;">what's new</a> before posting.</p>
+      <p class="muted">Many requests are already live. Check <a href="/changelog/">what's new</a> before posting.</p>
     </div>
   </section>
+
+  <script is:inline define:vars={{ endpoint }}>
+    const form = document.getElementById("fr-form");
+    const status = document.getElementById("fr-status");
+    const submit = document.getElementById("fr-submit");
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      status.style.color = "var(--sr-muted)";
+      const data = Object.fromEntries(new FormData(form).entries());
+      submit.disabled = true;
+      submit.textContent = "Submitting…";
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.ok) {
+          form.reset();
+          status.style.color = "var(--sr-success)";
+          status.textContent = "Thanks — request received. We read every one.";
+        } else {
+          status.style.color = "var(--sr-error)";
+          status.textContent = json.error || "Something went wrong. Please try again, or email us.";
+        }
+      } catch {
+        status.style.color = "var(--sr-error)";
+        status.textContent = "Couldn't reach the server. Please try again, or email us.";
+      } finally {
+        submit.disabled = false;
+        submit.textContent = "Submit request";
+      }
+    });
+  </script>
 </Base>

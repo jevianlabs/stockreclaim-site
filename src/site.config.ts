@@ -11,6 +11,8 @@ export const site = {
   appStoreUrl: "", // e.g. "https://apps.shopify.com/stockreclaim"
   // Where "Request a free scan" / "Join the waitlist" goes pre-launch.
   waitlistUrl: "mailto:hello@stockreclaim.com?subject=StockReclaim%20free%20scan",
+  // The embedded app's public API origin (feature-request endpoint lives here).
+  apiBase: "https://restock-radar-prod.fly.dev",
   supportEmail: "support@stockreclaim.com",
   helloEmail: "hello@stockreclaim.com",
   // Feature-request board (hybrid decision: use a proven tool, don't build one).
