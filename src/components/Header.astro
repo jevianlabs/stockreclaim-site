@@ -24,7 +24,7 @@ const installLabel = site.appStoreUrl ? "Install" : "Request a free scan";
       {nav.map((item) => (
         <a href={item.href} aria-current={path.startsWith(item.href) && item.href !== "/" ? "page" : undefined}>{item.label}</a>
       ))}
-      <a class="btn btn-on-teal" href={installUrl}>{installLabel}</a>
+      <a class="btn btn-cta" href={installUrl}>{installLabel}</a>
     </nav>
   </div>
 </header>

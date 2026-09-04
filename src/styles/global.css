@@ -123,6 +123,12 @@ section { padding: 72px 0; }
 .btn.btn-ghost-on-teal { background: transparent; color: var(--sr-paper); border-color: rgba(244, 247, 245, 0.35); }
 .btn.btn-ghost-on-teal:hover { border-color: var(--sr-paper); }
 .btn[disabled], .btn:disabled { opacity: 0.45; cursor: default; }
+/* The one brass button: the install / free-scan CTA, by the founder's call
+   (4 Sep 2026). Brass ground, teal text; hover darkens one step. Every other
+   button stays teal/paper per the ruling in brand/BRAND-SPEC.md. */
+.btn-cta { background: var(--sr-brass); color: var(--sr-teal); border-color: transparent; }
+.btn-cta:hover { background: #d9a93f; color: var(--sr-teal); }
+.on-teal .btn-cta, .site-nav .btn-cta { color: var(--sr-teal); }
 
 /* ---- Cards ---- */
 .card {
