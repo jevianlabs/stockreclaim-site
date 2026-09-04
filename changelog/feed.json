@@ -1,0 +1,51 @@
+{
+  "product": "StockReclaim",
+  "updated": "2026-08-29",
+  "entries": [
+    {
+      "id": "2026-08-29-accountant-packet",
+      "title": "Monthly reconciliation packet and accountant seat",
+      "date": "2026-08-29",
+      "tag": "New",
+      "plan": "Growth",
+      "banner": "Growth now emails a monthly reconciliation PDF to your bookkeeper, automatically.",
+      "url": "https://getstockreclaim.com/changelog/#2026-08-29-accountant-packet"
+    },
+    {
+      "id": "2026-08-29-multi-location",
+      "title": "Full multi-location coverage",
+      "date": "2026-08-29",
+      "tag": "New",
+      "plan": "Growth",
+      "banner": "Every rule now carries a location, and you can scope the audit to the locations you choose.",
+      "url": "https://getstockreclaim.com/changelog/#2026-08-29-multi-location"
+    },
+    {
+      "id": "2026-08-29-restock-now",
+      "title": "Restock now — fix an exception in one click",
+      "date": "2026-08-29",
+      "tag": "New",
+      "plan": "Starter",
+      "banner": "You can now put missing units back into sellable stock in one click, right from an exception.",
+      "url": "https://getstockreclaim.com/changelog/#2026-08-29-restock-now"
+    },
+    {
+      "id": "2026-08-29-rule-d",
+      "title": "Rule D — restock claimed, stock unchanged",
+      "date": "2026-08-29",
+      "tag": "New",
+      "plan": "Growth",
+      "banner": "New on Growth: Rule D catches restocks that were recorded but never actually moved your stock.",
+      "url": "https://getstockreclaim.com/changelog/#2026-08-29-rule-d"
+    },
+    {
+      "id": "2026-08-28-digest-ledger",
+      "title": "Weekly digest and recovery ledger",
+      "date": "2026-08-28",
+      "tag": "New",
+      "plan": "Starter",
+      "banner": "The weekly digest and a running recovery ledger are live on Starter and Growth.",
+      "url": "https://getstockreclaim.com/changelog/#2026-08-28-digest-ledger"
+    }
+  ]
+}
