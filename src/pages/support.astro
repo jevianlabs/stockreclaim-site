@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+---
+
+<Base title="Support" description="Get help with StockReclaim — search the help center, email support, or request a feature.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">Support</p>
+      <h1>We're a small team, and we answer.</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Most questions are answered in the help center. For anything else, email
+        us — we read every message.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap">
+      <div class="grid grid-3">
+        <div class="card">
+          <h2 style="font-size:1.2rem;">Help center</h2>
+          <p class="muted">Guides on installing, the four rules, plans and privacy.</p>
+          <a class="btn btn-ghost" href="/help/" style="margin-top:8px;">Browse guides</a>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.2rem;">Email support</h2>
+          <p class="muted">A real reply, usually within one business day.</p>
+          <a class="btn btn-primary" href={`mailto:${site.supportEmail}?subject=StockReclaim%20support`} style="margin-top:8px;">{site.supportEmail}</a>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.2rem;">Request a feature</h2>
+          <p class="muted">Post an idea and vote on what we build next.</p>
+          <a class="btn btn-ghost" href="/feature-requests/" style="margin-top:8px;">Open requests</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:8px;">
+    <div class="wrap narrow">
+      <h2>Contact us</h2>
+      <p class="muted">
+        Include your store's <code>.myshopify.com</code> URL and a short
+        description — a screenshot helps. We never ask for your password or a
+        staff account; we only ask for what we need to reproduce the issue.
+      </p>
+
+      <!--
+        Static-first contact form. Wire the `action` to a no-backend form
+        service (Formspree, Web3Forms, Basin) before launch, or replace with an
+        embedded helpdesk widget (Crisp, Chatwoot) if you'd rather have a shared
+        inbox. Until `action` is set, the button falls back to a mailto below.
+      -->
+      <form
+        class="card"
+        style="display:grid; gap:16px; margin-top:16px;"
+        action=""
+        method="POST"
+        onsubmit="if(!this.getAttribute('action')){event.preventDefault();window.location.href='mailto:'+this.dataset.fallback+'?subject=StockReclaim%20support&body='+encodeURIComponent(this.message.value+'\n\nStore: '+this.store.value+'\nFrom: '+this.email.value);}"
+        data-fallback={site.supportEmail}
+      >
+        <label style="display:grid; gap:6px; font-weight:600;">
+          Your email
+          <input name="email" type="email" required placeholder="you@store.com"
+            style="padding:12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit;" />
+        </label>
+        <label style="display:grid; gap:6px; font-weight:600;">
+          Store URL
+          <input name="store" type="text" placeholder="your-store.myshopify.com"
+            style="padding:12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit;" />
+        </label>
+        <label style="display:grid; gap:6px; font-weight:600;">
+          How can we help?
+          <textarea name="message" required rows="5" placeholder="What's happening, and what did you expect?"
+            style="padding:12px; border:1px solid var(--sr-line); border-radius:8px; font:inherit; resize:vertical;"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit" style="justify-self:start;">Send message</button>
+      </form>
+    </div>
+  </section>
+</Base>

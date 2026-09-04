@@ -1,0 +1,53 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { site } from "../../site.config";
+
+const articles = await getCollection("help");
+const categories = [
+  "Getting started",
+  "How the audit works",
+  "Plans & billing",
+  "Data & privacy",
+] as const;
+
+const byCategory = categories.map((cat) => ({
+  cat,
+  items: articles
+    .filter((a) => a.data.category === cat)
+    .sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<Base title="Help center" description="Guides for installing StockReclaim, understanding the returns audit, plans and billing, and how your data is handled.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">Help center</p>
+      <h1>How StockReclaim works, end to end.</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Short, plain-language guides. Still stuck? <a href="/support/" style="color:#fff;">Contact support</a>.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap">
+      <div class="grid grid-2">
+        {byCategory.map(({ cat, items }) => (
+          <div class="card">
+            <h2 style="font-size:1.2rem;">{cat}</h2>
+            <ul style="list-style:none; padding:0; margin:12px 0 0; display:grid; gap:12px;">
+              {items.map((a) => (
+                <li>
+                  <a href={`/help/${a.slug}/`} style="font-weight:600; text-decoration:none;">{a.data.title}</a>
+                  <p class="muted" style="margin:2px 0 0; font-size:0.92rem;">{a.data.summary}</p>
+                </li>
+              ))}
+              {items.length === 0 && <li class="muted">Coming soon.</li>}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

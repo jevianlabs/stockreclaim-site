@@ -1,0 +1,235 @@
+---
+import Base from "../layouts/Base.astro";
+import DashboardMock from "../components/DashboardMock.astro";
+import HeroAnimation from "../components/HeroAnimation.astro";
+import { site } from "../site.config";
+const installUrl = site.appStoreUrl || site.waitlistUrl;
+const installLabel = site.appStoreUrl ? "Install on Shopify" : "Request a free scan";
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="hero on-teal">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Returns audit for Shopify</p>
+        <h1>Some of your refunds never went back on the shelf.</h1>
+        <p class="muted hero-lede">
+          When a refund or return is processed but the unit is never restocked,
+          Shopify shows stock you can't sell. StockReclaim finds every one of
+          those cases, ages it, and totals what it cost you — in dollars.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-on-teal" href={installUrl}>{installLabel}</a>
+          <a class="btn btn-ghost-on-teal" href="#how">See how it works</a>
+        </div>
+        <p class="muted hero-note">
+          Free to install. The dollar figure is free — you see it before you pay.
+          No per-return fees, ever.
+        </p>
+      </div>
+
+      <!-- Live product shot: the real dashboard, on the house. -->
+      <div class="hero-shot">
+        <DashboardMock />
+        <p class="muted hero-shot-note">
+          Illustrative demo store. Your store's figures are computed live from
+          your own refunds and returns.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section>
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">The leak nobody watches</p>
+      <h2>Phantom inventory is a hole in a row you can't see from the admin.</h2>
+      <p class="muted" style="font-size:1.1rem;">
+        Returns portals push a restock when a return completes. None of them check
+        that it actually happened, and most small stores have no portal at all —
+        they rely on the Restock checkbox on the refund screen. One unchecked box,
+        one warehouse hire who doesn't know the process, and the count drifts from
+        the shelf. You only notice when something says "in stock" and isn't.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="on-teal">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2 style="max-width:20ch;">Install, and see a real number in ten minutes.</h2>
+      <div class="grid grid-4" style="margin-top:32px;">
+        <div class="card">
+          <h3>1 · Install</h3>
+          <p class="muted">One click from the Shopify App Store. No setup, no configuration, nothing to connect.</p>
+        </div>
+        <div class="card">
+          <h3>2 · Scan</h3>
+          <p class="muted">StockReclaim reads your refunds and returns and correlates each one against the inventory record.</p>
+        </div>
+        <div class="card">
+          <h3>3 · See the figure</h3>
+          <p class="muted">A single total, split by cause, with the exact orders behind it — free, before you decide to pay.</p>
+        </div>
+        <div class="card">
+          <h3>4 · Work it</h3>
+          <p class="muted">Resolve, write off, or put the units back with one click. Every decision is logged.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FOUR RULES -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">What the audit detects</p>
+      <h2>Four ways a returned unit goes missing.</h2>
+      <div class="grid grid-2" style="margin-top:28px;">
+        <div class="card">
+          <span class="tag tag-new">Rule A</span>
+          <h3 style="margin-top:12px;">Refunded, not restocked</h3>
+          <p class="muted">A refund was issued with the Restock box unchecked. The money went back; the unit never did.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-new">Rule B</span>
+          <h3 style="margin-top:12px;">Open return, aging</h3>
+          <p class="muted">A return is in progress and the unit hasn't come back yet — tracked and aged so nothing stalls silently.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-new">Rule C</span>
+          <h3 style="margin-top:12px;">Confirmed loss</h3>
+          <p class="muted">A return was dispositioned as not-restocked or missing. A known write-off, surfaced and counted.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-plan">Growth</span>
+          <h3 style="margin-top:12px;">Rule D · Restock claimed, stock unchanged</h3>
+          <p class="muted">A restock was recorded, but the on-hand level never moved. The check no portal runs on itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / DATA -->
+  <section class="on-teal">
+    <div class="wrap" style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+      <div>
+        <p class="eyebrow">What we can, and can't, see</p>
+        <h2>An honest auditor doesn't claim to see the shelf.</h2>
+        <p class="muted">
+          StockReclaim reports where the <em>record</em> and the <em>adjustment</em>
+          disagree. It never claims a physical count, and never says an item is
+          definitely gone — only that the paperwork doesn't reconcile.
+        </p>
+      </div>
+      <div style="display:grid; gap:16px;">
+        <div class="card">
+          <h3>Read-mostly by design</h3>
+          <p class="muted">The scan never writes. The one and only write is <strong>Restock now</strong> — and only when you click it on a specific exception.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing of yours is mirrored</h3>
+          <p class="muted">No products, orders, refunds or inventory are copied or stored. The scan reads live and discards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RETENTION FRAMING -->
+  <section class="on-teal">
+    <div class="wrap ledger-grid">
+      <div>
+        <p class="eyebrow">Why it's a subscription, not a one-off</p>
+        <h2>Finding the leak is the easy part. Proving it stays closed is the job.</h2>
+        <p class="muted" style="font-size:1.1rem;">
+          The person who forgets to tick Restock changes every few months, and every
+          new warehouse hire is a new leak. A weekly digest and a running recovery
+          ledger keep the number in front of you, so a clean quarter this quarter
+          doesn't become a blind one next.
+        </p>
+      </div>
+      <div class="ledger-anim">
+        <HeroAnimation />
+        <p class="muted ledger-anim-note">Illustrative figure. Yours is computed from your own refunds and returns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING PREVIEW -->
+  <section class="on-teal">
+    <div class="wrap">
+      <p class="eyebrow">Simple, flat pricing</p>
+      <h2>Priced on the money found, not on your store size or return count.</h2>
+      <div class="grid grid-3" style="margin-top:28px;">
+        <div class="card">
+          <h3>Free</h3>
+          <p class="num" style="font-size:1.8rem; font-family:var(--sr-font-display); font-weight:700; margin:0 0 8px;">$0</p>
+          <p class="muted">The diagnosis. The full dollar figure, split by cause, and the top exceptions.</p>
+        </div>
+        <div class="card">
+          <h3>Starter</h3>
+          <p class="num" style="font-size:1.8rem; font-family:var(--sr-font-display); font-weight:700; margin:0 0 8px;">$39<span style="font-size:0.9rem; font-weight:500;">/mo</span></p>
+          <p class="muted">The complete audit: every exception, 12-month history, weekly digest, CSV export, recovery ledger.</p>
+        </div>
+        <div class="card">
+          <h3>Growth</h3>
+          <p class="num" style="font-size:1.8rem; font-family:var(--sr-font-display); font-weight:700; margin:0 0 8px;">$89<span style="font-size:0.9rem; font-weight:500;">/mo</span></p>
+          <p class="muted">Continuous assurance: Rule D monitoring, multi-location, and a monthly packet for your bookkeeper.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:28px;">
+        <a class="btn btn-on-teal" href="/pricing/">See full plan comparison</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section>
+    <div class="wrap narrow" style="text-align:center;">
+      <h2>See what your returns actually cost you.</h2>
+      <p class="muted" style="font-size:1.1rem;">Install free. The number is yours to keep, whether or not you upgrade.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+        <a class="btn btn-primary" href={installUrl}>{installLabel}</a>
+        <a class="btn btn-ghost" href="/help/">Read the help center</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .hero { padding-top: 84px; padding-bottom: 76px; position: relative; overflow: hidden; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero-copy { max-width: 64ch; margin: 0 auto; text-align: center; }
+  .hero-copy h1 { max-width: 18ch; margin-left: auto; margin-right: auto; }
+  .hero-lede { font-size: 1.15rem; max-width: 56ch; margin-left: auto; margin-right: auto; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+  .hero-note { margin-top: 20px; font-size: 0.92rem; }
+  .hero-shot {
+    max-width: 940px;
+    margin: 48px auto 0;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-shot-note { text-align: center; font-size: 0.82rem; margin-top: 16px; }
+
+  @media (max-width: 640px) {
+    .hero { padding-top: 60px; padding-bottom: 52px; }
+    .hero-shot { margin-top: 32px; }
+  }
+
+  /* Ledger animation beside the retention copy */
+  .ledger-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .ledger-anim { display: grid; justify-items: center; gap: 12px; }
+  .ledger-anim .sr-anim { border: 1px solid var(--sr-line-on-teal); }
+  .ledger-anim-note { font-size: 0.82rem; margin: 0; text-align: center; }
+  @media (max-width: 860px) { .ledger-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Trust section stacks on narrow screens */
+  @media (max-width: 860px) {
+    section .wrap[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

@@ -1,0 +1,17 @@
+{
+  "name": "stockreclaim-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Marketing site, help center and public changelog for StockReclaim. Brand applies in full here — this is NOT the embedded admin.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.2.1",
+    "astro": "^4.16.18"
+  }
+}

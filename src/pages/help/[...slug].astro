@@ -1,0 +1,27 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Doc from "../../layouts/Doc.astro";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("help");
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"help">;
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Doc
+  title={entry.data.title}
+  summary={entry.data.summary}
+  category={entry.data.category}
+  updated={entry.data.updated}
+>
+  <Content />
+</Doc>

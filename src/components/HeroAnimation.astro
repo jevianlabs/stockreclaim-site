@@ -1,0 +1,101 @@
+---
+/**
+ * HeroAnimation — the Ledger mark building itself, then the recovered figure
+ * counting up. Generated in Claude Design ("StockReclaim Hero Animation",
+ * stockreclaim-hero.html) against the StockReclaim design system, then
+ * adapted for Astro: tokens from global.css, responsive scaling, the figure
+ * hidden until the count starts, and a short fade before each loop.
+ *
+ * CSS only. The count-up uses @property + CSS counters (Chrome, Safari 16.4+,
+ * Firefox 128+); older browsers show the final figure. prefers-reduced-motion
+ * shows the final frame with no motion. Brass appears exactly once.
+ */
+const { amount = "4,249.70", caption = "Recovered this month" } = Astro.props;
+const [dollars, cents] = amount.split(".");
+const [k, h] = dollars.split(",");
+---
+
+<div class="sr-anim" role="img" aria-label={`The StockReclaim Ledger mark. $${amount} ${caption.toLowerCase()}.`}>
+  <div class="sr-anim-stage" style={`--k-end:${Number(k)}; --h-end:${Number(h)}; --c-end:${Number(cents ?? "0")};`}>
+    <svg class="sr-anim-mark" viewBox="26 31 108 101" aria-hidden="true" focusable="false">
+      <rect class="sr-anim-base"  x="30" y="122" width="100" height="6"  fill="#F4F7F5"/>
+      <rect class="sr-anim-left"  x="40" y="35"  width="32"  height="82" fill="#F4F7F5"/>
+      <rect class="sr-anim-right" x="88" y="70"  width="32"  height="47" fill="#F4F7F5"/>
+      <rect class="sr-anim-brass" x="88" y="35"  width="32"  height="30" fill="#E4B54D"/>
+    </svg>
+    <div class="sr-anim-figure" aria-hidden="true">
+      <div class="sr-anim-amount"><span class="sr-anim-dollars"></span><span class="sr-anim-cents"></span></div>
+      <div class="sr-anim-caption">{caption}</div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  @property --k { syntax: "<integer>"; inherits: true; initial-value: 0; }
+  @property --h { syntax: "<integer>"; inherits: true; initial-value: 0; }
+  @property --c { syntax: "<integer>"; inherits: true; initial-value: 0; }
+  @counter-style sr-pad3 { system: extends decimal; pad: 3 "0"; }
+  @counter-style sr-pad2 { system: extends decimal; pad: 2 "0"; }
+
+  .sr-anim {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 560 / 320;
+    background: var(--sr-teal);
+    border-radius: var(--sr-radius-card);
+    overflow: hidden;
+    container-type: inline-size;
+    position: relative;
+  }
+  .sr-anim-stage {
+    --dur: 5s;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --k: var(--k-end); --h: var(--h-end); --c: var(--c-end);
+    position: absolute; inset: 0;
+    width: 560px; height: 320px;
+    transform-origin: top left;
+    color: var(--sr-paper);
+    font-family: var(--sr-font);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 22px;
+    animation: sr-anim-count var(--dur) var(--ease) infinite, sr-anim-fade var(--dur) linear infinite;
+  }
+  @container (max-width: 559px) {
+    .sr-anim-stage { transform: scale(calc(100cqw / 560px)); }
+  }
+  .sr-anim-mark { width: 150px; height: 140px; display: block; overflow: visible; }
+  .sr-anim-mark rect { transform-box: fill-box; }
+  .sr-anim-base  { transform-origin: left center;   animation: sr-anim-base  var(--dur) var(--ease) infinite; }
+  .sr-anim-left  { transform-origin: center bottom; animation: sr-anim-left  var(--dur) var(--ease) infinite; }
+  .sr-anim-right { transform-origin: center bottom; animation: sr-anim-right var(--dur) var(--ease) infinite; }
+  .sr-anim-brass { transform-origin: center top;    animation: sr-anim-brass var(--dur) var(--ease) infinite; }
+
+  .sr-anim-figure {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    font-variant-numeric: tabular-nums; line-height: 1;
+    animation: sr-anim-figure var(--dur) ease-out infinite;
+  }
+  .sr-anim-amount { display: flex; align-items: baseline; letter-spacing: -0.03em; white-space: nowrap; }
+  .sr-anim-dollars { font-size: 44px; font-weight: 700; counter-reset: k var(--k) h var(--h); }
+  .sr-anim-dollars::before { content: "$" counter(k) "," counter(h, sr-pad3); }
+  .sr-anim-cents { font-size: 22px; font-weight: 500; color: var(--sr-sea-on-teal); counter-reset: c var(--c); }
+  .sr-anim-cents::before { content: "." counter(c, sr-pad2); }
+  .sr-anim-caption {
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--sr-sea-on-teal); animation: sr-anim-caption var(--dur) ease-out infinite;
+  }
+
+  /* 0–3 s build, 3–4.7 s hold, then a short fade before the loop restarts. */
+  @keyframes sr-anim-base   { 0% { transform: scaleX(0); } 12% { transform: scaleX(1); } 100% { transform: scaleX(1); } }
+  @keyframes sr-anim-left   { 0%, 10% { transform: scaleY(0); } 26% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
+  @keyframes sr-anim-right  { 0%, 22% { transform: scaleY(0); } 36% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
+  @keyframes sr-anim-brass  { 0%, 36% { transform: scaleY(0); } 46% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
+  @keyframes sr-anim-count  { 0%, 32% { --k: 0; --h: 0; --c: 0; } 60% { --k: var(--k-end); --h: var(--h-end); --c: var(--c-end); } 100% { --k: var(--k-end); --h: var(--h-end); --c: var(--c-end); } }
+  @keyframes sr-anim-figure { 0%, 30% { opacity: 0; } 36% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes sr-anim-caption{ 0%, 48% { opacity: 0; } 56% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes sr-anim-fade   { 0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sr-anim-stage, .sr-anim-stage * { animation: none !important; }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+
+const { portalUrl, featurebaseOrg } = site.featureBoard;
+const hasBoard = Boolean(portalUrl || featurebaseOrg);
+const boardHref = portalUrl || (featurebaseOrg ? `https://${featurebaseOrg}.featurebase.app` : "");
+---
+
+<Base title="Feature requests" description="Suggest a feature, vote on ideas, and see what's planned for StockReclaim.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">Feature requests</p>
+      <h1>Tell us what to build next.</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Post an idea, vote on what matters to you, and follow it from planned to
+        shipped. The most-wanted requests move up the roadmap.
+      </p>
+      {hasBoard && (
+        <a class="btn btn-on-teal" href={boardHref} style="margin-top:8px;" target="_blank" rel="noopener">Open the request board</a>
+      )}
+    </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      {featurebaseOrg ? (
+        <!-- Featurebase inline widget. Loads only when an org slug is configured. -->
+        <div data-featurebase-embed style="min-height:640px;">
+          <div id="featurebase-widget"></div>
+        </div>
+        <script is:inline define:vars={{ featurebaseOrg }}>
+          (function () {
+            const s = document.createElement("script");
+            s.src = "https://do.featurebase.app/js/sdk.js";
+            s.id = "featurebase-sdk";
+            document.head.appendChild(s);
+            window.Featurebase = window.Featurebase || function () {
+              (window.Featurebase.q = window.Featurebase.q || []).push(arguments);
+            };
+            window.Featurebase("embed", {
+              organization: featurebaseOrg,
+              basePath: null,
+              theme: "light",
+              initialPage: "Board",
+            });
+          })();
+        </script>
+      ) : boardHref ? (
+        <div class="card" style="text-align:center;">
+          <h2 style="font-size:1.3rem;">Head to the request board</h2>
+          <p class="muted">Post and vote on ideas over on our public board.</p>
+          <a class="btn btn-primary" href={boardHref} target="_blank" rel="noopener" style="margin-top:8px;">Open the board →</a>
+        </div>
+      ) : (
+        <!-- No board configured yet: fall back to email so the page still works. -->
+        <div class="card">
+          <h2 style="font-size:1.3rem;">Request a feature</h2>
+          <p class="muted">
+            A public voting board is on the way. For now, email your idea and we'll
+            add it — and tell you when it ships.
+          </p>
+          <a class="btn btn-primary" href={`mailto:${site.helloEmail}?subject=Feature%20request`} style="margin-top:8px;">Email a request</a>
+          <p class="muted" style="margin-top:20px; font-size:0.85rem;">
+            <strong>Setup note (remove before launch):</strong> to turn on the
+            embedded board, set <code>featureBoard.featurebaseOrg</code> (Featurebase
+            slug) or <code>featureBoard.portalUrl</code> in
+            <code>src/site.config.ts</code>. Featurebase and Canny both have a free
+            tier; Fider is an open-source self-host option.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="on-teal">
+    <div class="wrap narrow" style="text-align:center;">
+      <h2>Already shipped?</h2>
+      <p class="muted">Many requests are already live. Check <a href="/changelog/" style="color:#fff;">what's new</a> before posting.</p>
+    </div>
+  </section>
+</Base>

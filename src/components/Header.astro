@@ -1,0 +1,39 @@
+---
+import { nav, site } from "../site.config";
+const path = Astro.url.pathname;
+const installUrl = site.appStoreUrl || site.waitlistUrl;
+const installLabel = site.appStoreUrl ? "Install" : "Request a free scan";
+---
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand-lockup" href="/" aria-label="StockReclaim home">
+      <!-- The Ledger mark (brand/svg/glyph-colour.svg geometry, paper on teal). -->
+      <svg viewBox="28 30 104 100" aria-hidden="true">
+        <rect x="30" y="122" width="100" height="6" fill="#F4F7F5"/>
+        <rect x="40" y="35" width="32" height="82" fill="#F4F7F5"/>
+        <rect x="88" y="70" width="32" height="47" fill="#F4F7F5"/>
+        <rect x="88" y="35" width="32" height="30" fill="#E4B54D"/>
+      </svg>
+      <span class="wordmark"><b>Stock</b><span>Reclaim</span></span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">Menu</button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      {nav.map((item) => (
+        <a href={item.href} aria-current={path.startsWith(item.href) && item.href !== "/" ? "page" : undefined}>{item.label}</a>
+      ))}
+      <a class="btn btn-on-teal" href={installUrl}>{installLabel}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector(".nav-toggle");
+  const menu = document.getElementById("site-nav");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(!!open));
+  });
+</script>

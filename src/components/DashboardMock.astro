@@ -1,0 +1,185 @@
+---
+/**
+ * DashboardMock — a faithful, on-brand recreation of the StockReclaim admin
+ * dashboard, framed in a browser/app window. Pure HTML/CSS (crisp at any size,
+ * responsive, no image files). Mirrors the real embedded app: the two headline
+ * figures, the cause split, and the worst-offenders table. Light "Polaris"
+ * palette so it reads as an authentic product shot on the navy hero.
+ *
+ * Numbers here are the demo-store figures — illustrative, matching the app.
+ */
+const offenders = [
+  { rank: 1, product: "The 3p Fulfilled Snowboard", sku: "sku-hosted-1", units: 2, value: "$5,259.90" },
+  { rank: 2, product: "The Complete Snowboard", sku: "SNO-0010", units: 5, value: "$3,499.75" },
+  { rank: 3, product: "The Collection Snowboard: Oxygen", sku: "HYD-0023", units: 1, value: "$1,025.00" },
+  { rank: 4, product: "The Collection Snowboard: Liquid", sku: "HYD-0024", units: 1, value: "$749.95" },
+  { rank: 5, product: "The Complete Snowboard", sku: "SNO-0013", units: 1, value: "$699.95" },
+];
+---
+
+<div class="dm-window">
+  <div class="dm-chrome">
+    <span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot"></span>
+    <span class="dm-chrome-label">StockReclaim — Shopify admin</span>
+  </div>
+
+  <div class="dm-body">
+    <div class="dm-head">
+      <strong class="dm-title">StockReclaim</strong>
+      <div class="dm-actions">
+        <span class="dm-btn">Export CSV</span>
+        <span class="dm-btn dm-btn-primary">↻ Rescan</span>
+      </div>
+    </div>
+    <p class="dm-meta">Last 60 days · 217 orders scanned · 15 refunds checked · updated just now</p>
+
+    <div class="dm-figs">
+      <div>
+        <p class="dm-lbl">Refunded, never returned to sellable stock</p>
+        <p class="dm-fig">$11,984.40</p>
+        <p class="dm-sub">across 10 exceptions</p>
+        <div class="dm-bars" aria-hidden="true">
+          <span style="height:34%"></span><span style="height:28%"></span>
+          <span style="height:46%"></span><span style="height:38%"></span>
+          <span style="height:60%"></span><span style="height:52%"></span>
+          <span style="height:72%"></span><span style="height:64%"></span>
+          <span class="on" style="height:100%"></span><span class="on" style="height:82%"></span>
+        </div>
+      </div>
+      <div class="dm-fig-right">
+        <p class="dm-lbl">Recovered since install</p>
+        <p class="dm-fig dm-fig-green">$9,509.50</p>
+        <p class="dm-sub">exceptions resolved or restocked through StockReclaim</p>
+      </div>
+    </div>
+
+    <div class="dm-progress" aria-hidden="true"><span></span></div>
+
+    <div class="dm-cases">
+      <div class="dm-case dm-case-blue">
+        <p class="dm-case-lbl">● Refunded, never restocked</p>
+        <p class="dm-case-val">$10,584.50 <span>9 cases</span></p>
+      </div>
+      <div class="dm-case dm-case-teal">
+        <p class="dm-case-lbl">● Return open, no decision</p>
+        <p class="dm-case-val">$1,399.90 <span>1 case</span></p>
+      </div>
+      <div class="dm-case dm-case-red">
+        <p class="dm-case-lbl">● Confirmed losses</p>
+        <p class="dm-case-val">$0.00 <span>0 cases</span></p>
+      </div>
+    </div>
+
+    <p class="dm-section-title">Worst offenders</p>
+    <table class="dm-table">
+      <thead>
+        <tr><th>Product</th><th>SKU</th><th class="r">Units</th><th class="r">Value</th></tr>
+      </thead>
+      <tbody>
+        {offenders.map((o) => (
+          <tr>
+            <td><span class="dm-rank">{o.rank}</span> {o.product}</td>
+            <td class="dm-sku">{o.sku}</td>
+            <td class="r">{o.units}</td>
+            <td class="r dm-mono">{o.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .dm-window {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--sr-font-body);
+    color: #1a1a1a;
+    line-height: 1.4;
+    max-width: 100%;
+  }
+  .dm-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: #f0f1f2;
+    border-bottom: 1px solid #e0e2e4;
+  }
+  .dm-dot { width: 10px; height: 10px; border-radius: 50%; background: #cdd0d4; }
+  .dm-dot:nth-child(1) { background: #ff5f57; }
+  .dm-dot:nth-child(2) { background: #febc2e; }
+  .dm-dot:nth-child(3) { background: #28c840; }
+  .dm-chrome-label {
+    margin-left: 10px; font-size: 0.72rem; color: #6b7177; font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .dm-body { padding: 20px 22px 22px; background: #fbfbfc; }
+
+  .dm-head { display: flex; align-items: center; justify-content: space-between; }
+  .dm-title { font-family: var(--sr-font-display); font-size: 1.05rem; color: #1a1a1a; }
+  .dm-actions { display: flex; gap: 8px; }
+  .dm-btn {
+    font-size: 0.74rem; font-weight: 600; padding: 6px 11px; border-radius: 8px;
+    border: 1px solid #d7d9dc; color: #33363a; background: #fff; white-space: nowrap;
+  }
+  .dm-btn-primary { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .dm-meta { margin: 10px 0 16px; font-size: 0.76rem; color: #6b7177; }
+
+  .dm-figs {
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px;
+    padding-bottom: 16px;
+  }
+  .dm-fig-right { border-left: 1px solid #ececed; padding-left: 18px; }
+  .dm-lbl { margin: 0 0 4px; font-size: 0.78rem; color: #45484c; font-weight: 500; }
+  .dm-fig {
+    margin: 0; font-family: var(--sr-font-display); font-weight: 700;
+    font-size: 2rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+    color: #1a1a1a;
+  }
+  .dm-fig-green { color: #067647; }
+  .dm-sub { margin: 3px 0 0; font-size: 0.74rem; color: #6b7177; }
+
+  .dm-bars { display: flex; align-items: flex-end; gap: 4px; height: 34px; margin-top: 12px; }
+  .dm-bars span { flex: 1; background: #d5d8db; border-radius: 2px 2px 0 0; }
+  .dm-bars span.on { background: #5c6b7a; }
+
+  .dm-progress { height: 6px; border-radius: 999px; background: #e6e7e9; overflow: hidden; margin: 4px 0 18px; display: flex; }
+  .dm-progress span { display: block; width: 72%; background: #4F63C2; }
+  .dm-progress::after { content: ""; flex: 1; background: #067647; }
+
+  .dm-cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .dm-case { border: 1px solid #e6e7e9; border-left-width: 3px; border-radius: 9px; padding: 11px 13px; background: #fff; }
+  .dm-case-blue { border-left-color: #4F63C2; }
+  .dm-case-teal { border-left-color: #177E74; }
+  .dm-case-red { border-left-color: #B03A48; }
+  .dm-case-lbl { margin: 0 0 5px; font-size: 0.72rem; color: #45484c; font-weight: 500; }
+  .dm-case-blue .dm-case-lbl { color: #4F63C2; }
+  .dm-case-teal .dm-case-lbl { color: #177E74; }
+  .dm-case-red .dm-case-lbl { color: #B03A48; }
+  .dm-case-val { margin: 0; font-family: var(--sr-font-display); font-weight: 700; font-size: 1rem; font-variant-numeric: tabular-nums; color: #1a1a1a; }
+  .dm-case-val span { font-weight: 500; font-size: 0.72rem; color: #6b7177; margin-left: 4px; }
+
+  .dm-section-title { margin: 20px 0 8px; font-family: var(--sr-font-display); font-weight: 600; font-size: 0.9rem; }
+  .dm-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .dm-table th { text-align: left; font-weight: 600; color: #6b7177; font-size: 0.72rem; padding: 6px 8px; border-bottom: 1px solid #e6e7e9; }
+  .dm-table td { padding: 8px; border-bottom: 1px solid #f0f1f2; color: #33363a; }
+  .dm-table tr:last-child td { border-bottom: none; }
+  .dm-table .r { text-align: right; }
+  .dm-mono { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .dm-sku { color: #6b7177; font-variant-numeric: tabular-nums; }
+  .dm-rank { display: inline-block; width: 16px; color: #9aa0a6; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 560px) {
+    .dm-figs { grid-template-columns: 1fr; }
+    .dm-fig-right { border-left: none; padding-left: 0; border-top: 1px solid #ececed; padding-top: 14px; }
+    .dm-cases { grid-template-columns: 1fr; }
+    .dm-fig { font-size: 1.7rem; }
+    .dm-sku { display: none; }
+    .dm-table th:nth-child(2), .dm-table td:nth-child(2) { display: none; }
+  }
+</style>

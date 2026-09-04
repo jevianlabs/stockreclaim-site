@@ -1,0 +1,36 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  summary?: string;
+  category?: string;
+  updated?: Date;
+}
+const { title, summary, category, updated } = Astro.props;
+const fmt = (d?: Date) =>
+  d ? d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "";
+---
+
+<Base title={title} description={summary}>
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      <nav aria-label="Breadcrumb" style="font-size:0.9rem; margin-bottom:20px;">
+        <a href="/help/">Help center</a>
+        <span class="muted"> / </span>
+        {category && <span class="muted">{category}</span>}
+      </nav>
+      <h1>{title}</h1>
+      {summary && <p class="muted" style="font-size:1.1rem;">{summary}</p>}
+      <article class="prose" style="margin-top:28px;">
+        <slot />
+      </article>
+      {updated && <p class="muted" style="margin-top:40px; font-size:0.85rem;">Last updated {fmt(updated)}.</p>}
+      <hr style="margin:40px 0; border:none; border-top:1px solid var(--sr-line);" />
+      <p class="muted">
+        Didn't find your answer? <a href="/support/">Contact support</a> or
+        <a href="/feature-requests/">request a feature</a>.
+      </p>
+    </div>
+  </section>
+</Base>

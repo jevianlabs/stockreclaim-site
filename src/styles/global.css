@@ -1,0 +1,246 @@
+/*
+  StockReclaim marketing site — global styles.
+  Brand v2 · Direction B "The Ledger" · source of truth: ../../brand/BRAND-SPEC.md
+  Brand applies in FULL here (this is not the embedded admin). Rules enforced:
+  - Brass (--sr-brass) marks money coming back and nothing else. One brass
+    element per view. Never running text on paper. Never a button colour.
+  - Teal ground; sea for structure, rules and eyebrows; paper for light fills;
+    muted for secondary text. Hairlines only. No gradients, no shadows.
+  - Type: Geist, one family. Tabular numerals wherever figures align.
+*/
+
+/* Geist from Google Fonts (the only permitted external host). */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Ground & paper */
+  --sr-teal: #0b3a3a;
+  --sr-teal-80: #1f4b4b;
+  --sr-paper: #f4f7f5;
+  --sr-paper-2: #e9efed;
+  /* Accent — rationed: one per view, marks money coming back, never text on paper */
+  --sr-brass: #e4b54d;
+  /* Structure */
+  --sr-sea: #3f8c84;
+  --sr-sea-on-teal: #9fc1bc;
+  /* Text */
+  --sr-text: #152524;
+  --sr-muted: #5c7472;
+  --sr-line: rgba(21, 37, 36, 0.12);
+  --sr-line-on-teal: rgba(244, 247, 245, 0.18);
+  /* Functional (site only; not Polaris tones) */
+  --sr-success: #1f7a5c;
+  --sr-warning: #8a5a00;
+  --sr-error: #a33a3a;
+  --sr-info: #2f5f8f;
+  /* Type */
+  --sr-font: "Geist", Arial, Helvetica, sans-serif;
+  --sr-font-display: var(--sr-font);
+  --sr-font-body: var(--sr-font);
+  --sr-tracking-display: -0.03em;
+  --sr-tracking-h: -0.02em;
+  --sr-tracking-wordmark: -0.025em;
+  /* Layout */
+  --sr-maxw: 1080px;
+  --sr-radius: 8px;
+  --sr-radius-card: 14px;
+  /* Aliases used by page-level inline styles */
+  --sr-text-on-teal: var(--sr-paper);
+  --sr-text-on-paper: var(--sr-text);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--sr-font);
+  color: var(--sr-text);
+  background: var(--sr-paper);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--sr-font);
+  line-height: 1.12;
+  margin: 0 0 0.5em;
+  color: var(--sr-text);
+}
+h1 { font-size: clamp(2.25rem, 4.6vw, 3.375rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.06; }
+h2 { font-size: clamp(1.5rem, 2.4vw, 1.75rem); font-weight: 600; letter-spacing: var(--sr-tracking-h); line-height: 1.2; }
+h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
+h4 { font-size: 0.875rem; font-weight: 600; }
+
+p { margin: 0 0 1em; }
+a { color: var(--sr-teal); text-decoration-color: var(--sr-sea); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--sr-teal); }
+
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--sr-muted); }
+
+.wrap { max-width: var(--sr-maxw); margin: 0 auto; padding: 0 32px; }
+.narrow { max-width: 760px; }
+
+section { padding: 72px 0; }
+@media (max-width: 640px) {
+  section { padding: 52px 0; }
+  .wrap { padding: 0 20px; }
+}
+
+/* ---- Buttons ----
+   Brass is never a button colour. Primary on paper = teal/paper; primary on
+   teal = paper/teal; quiet = transparent with a hairline border. No shrink on
+   press; hover darkens one step. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sr-font);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: 13px 20px;
+  border-radius: var(--sr-radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn.btn-primary { background: var(--sr-teal); color: var(--sr-paper); }
+.btn.btn-primary:hover { background: var(--sr-teal-80); color: var(--sr-paper); }
+.btn.btn-ghost { background: transparent; color: var(--sr-teal); border-color: rgba(21, 37, 36, 0.25); }
+.btn.btn-ghost:hover { border-color: var(--sr-teal); }
+/* Doubled selectors so these outrank `.on-teal a` and `.site-nav a`. */
+.btn.btn-on-teal { background: var(--sr-paper); color: var(--sr-teal); }
+.btn.btn-on-teal:hover { background: var(--sr-paper-2); color: var(--sr-teal); }
+.btn.btn-ghost-on-teal { background: transparent; color: var(--sr-paper); border-color: rgba(244, 247, 245, 0.35); }
+.btn.btn-ghost-on-teal:hover { border-color: var(--sr-paper); }
+.btn[disabled], .btn:disabled { opacity: 0.45; cursor: default; }
+
+/* ---- Cards ---- */
+.card {
+  background: #fff;
+  border: 1px solid var(--sr-line);
+  border-radius: var(--sr-radius-card);
+  padding: 26px 28px;
+}
+
+/* ---- Eyebrow / labels ---- */
+.eyebrow {
+  font-family: var(--sr-font);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sr-sea);
+  margin: 0 0 12px;
+}
+
+/* The one place brass is allowed as type: a figure on the teal ground, marking
+   money coming back. Never on paper. */
+.figure {
+  font-family: var(--sr-font);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--sr-brass);
+  letter-spacing: var(--sr-tracking-display);
+}
+
+/* ---- Header ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 58, 58, 0.94);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--sr-line-on-teal);
+}
+.site-header .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.brand-lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-lockup svg { width: 26px; height: 26px; display: block; }
+.wordmark { font-family: var(--sr-font); font-size: 1.15rem; color: var(--sr-paper); letter-spacing: var(--sr-tracking-wordmark); }
+.wordmark b { font-weight: 700; }
+.wordmark span { font-weight: 500; }
+.site-nav { display: flex; gap: 22px; margin-left: auto; align-items: center; }
+.site-nav a { color: var(--sr-paper); text-decoration: none; font-size: 0.95rem; font-weight: 500; opacity: 0.85; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { opacity: 1; }
+.site-nav .btn { padding: 9px 16px; font-size: 0.92rem; opacity: 1; }
+.nav-toggle { display: none; }
+@media (max-width: 860px) {
+  .site-nav { display: none; }
+  .site-header .wrap { gap: 12px; }
+  .nav-toggle {
+    display: inline-flex; margin-left: auto; background: transparent;
+    border: 1px solid rgba(244, 247, 245, 0.35); border-radius: var(--sr-radius); color: var(--sr-paper);
+    padding: 8px 12px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .site-nav.open {
+    display: flex; flex-direction: column; align-items: flex-start;
+    position: absolute; top: 64px; left: 0; right: 0; margin: 0;
+    background: var(--sr-teal); padding: 16px 24px 24px; gap: 16px;
+    border-bottom: 1px solid var(--sr-line-on-teal);
+  }
+  .site-nav.open .btn { width: 100%; justify-content: center; }
+}
+
+/* ---- Footer ---- */
+.site-footer { background: var(--sr-teal); color: var(--sr-sea-on-teal); padding: 56px 0 40px; }
+.site-footer a { color: var(--sr-paper); text-decoration: none; opacity: 0.85; }
+.site-footer a:hover { opacity: 1; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.footer-grid h4 { color: var(--sr-paper); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-legal { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--sr-line-on-teal); font-size: 0.85rem; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+@media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ---- Sections on teal ---- */
+.on-teal { background: var(--sr-teal); color: var(--sr-paper); }
+.on-teal h1, .on-teal h2, .on-teal h3, .on-teal h4 { color: var(--sr-paper); }
+.on-teal .muted { color: var(--sr-sea-on-teal); }
+.on-teal .eyebrow { color: var(--sr-sea-on-teal); }
+.on-teal .card { background: var(--sr-teal-80); border-color: var(--sr-line-on-teal); color: var(--sr-paper); }
+.on-teal a { color: var(--sr-paper); text-decoration-color: var(--sr-sea-on-teal); }
+
+/* ---- Grids ---- */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+/* ---- Tags ---- */
+.tag { display: inline-block; font-family: var(--sr-font); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
+.tag-new { background: rgba(63, 140, 132, 0.14); color: #2b6b64; border: 1px solid rgba(63, 140, 132, 0.35); }
+.tag-improved { background: rgba(92, 116, 114, 0.12); color: var(--sr-muted); border: 1px solid rgba(92, 116, 114, 0.3); }
+.tag-fixed { background: var(--sr-paper-2); color: var(--sr-muted); border: 1px solid var(--sr-line); }
+.tag-plan { background: var(--sr-teal); color: var(--sr-paper); }
+.on-teal .tag-new { background: rgba(159, 193, 188, 0.16); color: var(--sr-sea-on-teal); border-color: rgba(159, 193, 188, 0.4); }
+.on-teal .tag-plan { background: var(--sr-paper); color: var(--sr-teal); }
+
+/* ---- Prose (help articles) ---- */
+.prose { font-size: 1.02rem; }
+.prose h2 { margin-top: 1.6em; }
+.prose h3 { margin-top: 1.4em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin-bottom: 0.4em; }
+.prose code { background: var(--sr-paper-2); padding: 2px 6px; border-radius: 5px; font-size: 0.9em; }
+.prose table { border-collapse: collapse; width: 100%; margin: 1.2em 0; font-size: 0.95rem; }
+.prose th, .prose td { border-top: 1px solid var(--sr-line); padding: 9px 12px; text-align: left; }
+.prose tr:last-child td { border-bottom: 1px solid var(--sr-line); }
+.prose th { font-weight: 600; color: var(--sr-muted); font-size: 0.85rem; }
+.prose td.num, .prose th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.prose blockquote { border-left: 2px solid var(--sr-sea); margin: 1.2em 0; padding: 4px 0 4px 18px; color: var(--sr-muted); }
+
+/* Accessible focus ring everywhere */
+a:focus-visible, .btn:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--sr-sea);
+  outline-offset: 2px;
+}

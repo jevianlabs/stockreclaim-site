@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+const installUrl = site.appStoreUrl || site.waitlistUrl;
+
+const rows: { label: string; free: string; starter: string; growth: string }[] = [
+  { label: "60-day scan on install", free: "✓", starter: "✓", growth: "✓" },
+  { label: "Headline dollar figure", free: "✓", starter: "✓", growth: "✓" },
+  { label: "Split by rule, with counts", free: "✓", starter: "✓", growth: "✓" },
+  { label: "Exception list", free: "Top 5 rows", starter: "Unlimited", growth: "Unlimited" },
+  { label: "Worst-offender SKUs", free: "—", starter: "✓", growth: "✓" },
+  { label: "Filters, sort, pagination", free: "—", starter: "✓", growth: "✓" },
+  { label: "Mark resolved / write off", free: "—", starter: "✓", growth: "✓" },
+  { label: "Restock now (one-click fix)", free: "—", starter: "✓", growth: "✓" },
+  { label: "CSV export", free: "—", starter: "✓", growth: "✓" },
+  { label: "Weekly digest email", free: "—", starter: "✓", growth: "✓" },
+  { label: "Re-scan", free: "Monthly, automatic", starter: "On demand", growth: "On demand" },
+  { label: "12-month history", free: "—", starter: "✓", growth: "✓" },
+  { label: "Recovery ledger", free: "—", starter: "✓", growth: "✓" },
+  { label: "Multi-location", free: "—", starter: "Single location", growth: "✓" },
+  { label: "Rule D — restock claimed, stock unchanged", free: "—", starter: "—", growth: "✓" },
+  { label: "Monthly reconciliation PDF", free: "—", starter: "—", growth: "✓" },
+  { label: "Accountant seat", free: "—", starter: "—", growth: "✓" },
+];
+---
+
+<Base title="Pricing" description="Free / Starter $39 / Growth $89. Priced on the money found, not your store size or return count. No per-return fees.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">Pricing</p>
+      <h1>Flat per store. No per-return fees.</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Every returns app meters your returns. StockReclaim doesn't. You pay for
+        the money it finds and keeps finding — a flat monthly price, whatever your
+        volume. 14-day free trial on both paid plans.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0; margin-top:-24px;">
+    <div class="wrap">
+      <div class="grid grid-3">
+        <div class="card">
+          <h2 style="font-size:1.3rem;">Free</h2>
+          <p style="font-size:2rem; font-family:var(--sr-font-display); font-weight:700; margin:4px 0;">$0</p>
+          <p class="muted">The diagnosis. See how bad it is, on the house.</p>
+          <a class="btn btn-ghost" style="width:100%; justify-content:center; margin-top:12px;" href={installUrl}>Install free</a>
+        </div>
+        <div class="card" style="border-color:var(--sr-sea); border-width:1.5px;">
+          <h2 style="font-size:1.3rem;">Starter</h2>
+          <p style="font-size:2rem; font-family:var(--sr-font-display); font-weight:700; margin:4px 0;">$39<span style="font-size:1rem; font-weight:500;">/mo</span></p>
+          <p class="muted">The complete audit for a single-location store.</p>
+          <a class="btn btn-primary" style="width:100%; justify-content:center; margin-top:12px;" href={installUrl}>Start 14-day trial</a>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.3rem;">Growth</h2>
+          <p style="font-size:2rem; font-family:var(--sr-font-display); font-weight:700; margin:4px 0;">$89<span style="font-size:1rem; font-weight:500;">/mo</span></p>
+          <p class="muted">Continuous assurance across every location.</p>
+          <a class="btn btn-ghost" style="width:100%; justify-content:center; margin-top:12px;" href={installUrl}>Start 14-day trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:8px;">
+    <div class="wrap">
+      <h2>What's in each plan</h2>
+      <div style="overflow-x:auto;">
+        <table class="prose" style="min-width:640px;">
+          <thead>
+            <tr>
+              <th style="width:44%;">Capability</th>
+              <th style="text-align:center;">Free</th>
+              <th style="text-align:center;">Starter</th>
+              <th style="text-align:center;">Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <td>{r.label}</td>
+                <td style="text-align:center;">{r.free}</td>
+                <td style="text-align:center;">{r.starter}</td>
+                <td style="text-align:center;">{r.growth}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:0.9rem; margin-top:12px;">
+        The headline dollar figure and the split by rule are never behind a plan —
+        you always see the total. Plans change what you can do about it, and how
+        far back you can look.
+      </p>
+    </div>
+  </section>
+
+  <section class="on-teal">
+    <div class="wrap narrow">
+      <h2>Questions about pricing</h2>
+      <details class="card" style="margin-bottom:12px;">
+        <summary style="cursor:pointer; font-weight:600;">Do you charge per return?</summary>
+        <p class="muted" style="margin-top:12px;">No. Every plan is a flat monthly price regardless of how many returns or refunds your store processes.</p>
+      </details>
+      <details class="card" style="margin-bottom:12px;">
+        <summary style="cursor:pointer; font-weight:600;">Can I upgrade or downgrade myself?</summary>
+        <p class="muted" style="margin-top:12px;">Yes — plan changes happen on Shopify's own billing screen from inside the app. You never need to email us to change plans.</p>
+      </details>
+      <details class="card" style="margin-bottom:12px;">
+        <summary style="cursor:pointer; font-weight:600;">What happens after the trial?</summary>
+        <p class="muted" style="margin-top:12px;">Nothing is charged during the 14-day trial. If you don't upgrade, you stay on Free with the headline figure and the top exceptions.</p>
+      </details>
+      <details class="card">
+        <summary style="cursor:pointer; font-weight:600;">Is billing handled securely?</summary>
+        <p class="muted" style="margin-top:12px;">All billing runs through Shopify's own App Pricing. StockReclaim never sees or stores a card — Shopify handles the charge, proration and the trial clock.</p>
+      </details>
+    </div>
+  </section>
+</Base>

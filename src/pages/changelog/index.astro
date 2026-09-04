@@ -1,0 +1,46 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const entries = (await getCollection("changelog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const tagClass = (t: string) =>
+  t === "New" ? "tag-new" : t === "Improved" ? "tag-improved" : "tag-fixed";
+const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+const rendered = await Promise.all(
+  entries.map(async (e) => ({ data: e.data, Content: (await e.render()).Content })),
+);
+---
+
+<Base title="What's new" description="Product updates and changes to StockReclaim — new rules, fixes and improvements.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">What's new</p>
+      <h1>Product updates</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Everything we ship, dated and plain. Subscribe to the
+        <a href="/changelog/feed.json" style="color:#fff;">JSON feed</a>.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      <ol style="list-style:none; margin:0; padding:0; display:grid; gap:20px;">
+        {rendered.map(({ data, Content }) => (
+          <li class="card">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px;">
+              <span class={`tag ${tagClass(data.tag)}`}>{data.tag}</span>
+              {data.plan && <span class="tag tag-plan">{data.plan}</span>}
+              <span class="muted num" style="margin-left:auto; font-size:0.88rem;">{fmt(data.date)}</span>
+            </div>
+            <h2 style="font-size:1.25rem; margin:0 0 8px;">{data.title}</h2>
+            <div class="prose"><Content /></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>
