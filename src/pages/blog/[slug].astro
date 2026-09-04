@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getPosts, fmtDate, type Post } from "../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+---
+
+<Base title={post.title} description={post.summary}>
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      <nav aria-label="Breadcrumb" style="font-size:0.9rem; margin-bottom:20px;">
+        <a href="/blog/">Blog</a>
+        {post.tag && (
+          <>
+            <span class="muted"> / </span>
+            <span class="muted">{post.tag}</span>
+          </>
+        )}
+      </nav>
+      <h1>{post.title}</h1>
+      <p class="muted" style="font-size:1.1rem;">{post.summary}</p>
+      <p class="muted num" style="font-size:0.88rem;">{fmtDate(post.publishedAt)}</p>
+      <article class="prose" style="margin-top:28px;" set:html={post.html} />
+      <hr style="margin:40px 0; border:none; border-top:1px solid var(--sr-line);" />
+      <p class="muted"><a href="/blog/">← All posts</a></p>
+    </div>
+  </section>
+</Base>

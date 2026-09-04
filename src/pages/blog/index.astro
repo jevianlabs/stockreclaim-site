@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getPosts, fmtDate } from "../../lib/blog";
+const posts = await getPosts();
+---
+
+<Base title="Blog" description="Plain writing on returns, restocking and the money that leaks between them, from the StockReclaim team.">
+  <section class="on-teal" style="padding-bottom:40px;">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">Blog</p>
+      <h1>Notes from the audit.</h1>
+      <p class="muted" style="font-size:1.1rem;">
+        Plain writing on returns, restocking and the money that leaks between them.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      {posts.length === 0 ? (
+        <p class="muted">First post coming soon.</p>
+      ) : (
+        <ol style="list-style:none; margin:0; padding:0; display:grid; gap:20px;">
+          {posts.map((p) => (
+            <li class="card">
+              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px;">
+                {p.tag && <span class="tag tag-new">{p.tag}</span>}
+                <span class="muted num" style="font-size:0.88rem;">{fmtDate(p.publishedAt)}</span>
+              </div>
+              <h2 style="font-size:1.25rem; margin:0 0 8px;">
+                <a href={`/blog/${p.slug}/`} style="text-decoration:none;">{p.title}</a>
+              </h2>
+              <p class="muted" style="margin:0;">{p.summary}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </section>
+</Base>

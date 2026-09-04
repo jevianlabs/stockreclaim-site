@@ -3,7 +3,7 @@ import sitemap from "@astrojs/sitemap";
 
 // The public marketing origin. Change to the real domain before launch — it
 // feeds the sitemap and canonical URLs.
-const SITE = process.env.SITE_URL || "https://getstockreclaim.com";
+const SITE = process.env.SITE_URL || "https://stockreclaim.com";
 
 // https://astro.build
 export default defineConfig({
