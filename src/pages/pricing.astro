@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../site.config";
+import { faqLd, softwareLd } from "../lib/seo";
 const installUrl = site.appStoreUrl || site.waitlistUrl;
 
 const rows: { label: string; free: string; starter: string; growth: string }[] = [
@@ -22,9 +23,15 @@ const rows: { label: string; free: string; starter: string; growth: string }[] =
   { label: "Monthly reconciliation PDF", free: "—", starter: "—", growth: "✓" },
   { label: "Accountant seat", free: "—", starter: "—", growth: "✓" },
 ];
+const faq = [
+  { q: "Do you charge per return?", a: "No. Every plan is a flat monthly price regardless of how many returns or refunds your store processes." },
+  { q: "Can I upgrade or downgrade myself?", a: "Yes. Plan changes happen on Shopify's own billing screen from inside the app. You never need to email us to change plans." },
+  { q: "What happens after the trial?", a: "Nothing is charged during the 14-day trial. If you don't upgrade, you stay on Free with the headline figure and the top exceptions." },
+  { q: "Is billing handled securely?", a: "All billing runs through Shopify's own App Pricing. StockReclaim never sees or stores a card. Shopify handles the charge, proration and the trial clock." },
+];
 ---
 
-<Base title="Pricing" description="Free / Starter $39 / Growth $89. Priced on the money found, not your store size or return count. No per-return fees.">
+<Base title="Pricing" description="Free / Starter $39 / Growth $89. Priced on the money found, not your store size or return count. No per-return fees." jsonLd={[softwareLd, faqLd(faq)]}>
   <section class="on-teal" style="padding-bottom:40px;">
     <div class="wrap narrow" style="text-align:center;">
       <p class="eyebrow">Pricing</p>

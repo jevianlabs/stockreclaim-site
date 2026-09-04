@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getPosts, fmtDate, type Post } from "../../lib/blog";
+import { blogPostingLd, breadcrumbLd } from "../../lib/seo";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -8,9 +9,25 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props as { post: Post };
+const all = await getPosts();
+const related = all.filter((p) => p.slug !== post.slug).slice(0, 3);
 ---
 
-<Base title={post.title} description={post.summary}>
+<Base
+  title={post.title}
+  description={post.summary}
+  ogType="article"
+  publishedTime={post.publishedAt}
+  modifiedTime={post.updatedAt}
+  jsonLd={[
+    blogPostingLd(post),
+    breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog/" },
+      { name: post.title, path: `/blog/${post.slug}/` },
+    ]),
+  ]}
+>
   <section style="padding-top:40px;">
     <div class="wrap narrow">
       <nav aria-label="Breadcrumb" style="font-size:0.9rem; margin-bottom:20px;">
@@ -24,10 +41,31 @@ const { post } = Astro.props as { post: Post };
       </nav>
       <h1>{post.title}</h1>
       <p class="muted" style="font-size:1.1rem;">{post.summary}</p>
-      <p class="muted num" style="font-size:0.88rem;">{fmtDate(post.publishedAt)}</p>
+      <p class="muted num" style="font-size:0.88rem;">
+        <time datetime={post.publishedAt}>{fmtDate(post.publishedAt)}</time>
+      </p>
       <article class="prose" style="margin-top:28px;" set:html={post.html} />
       <hr style="margin:40px 0; border:none; border-top:1px solid var(--sr-line);" />
-      <p class="muted"><a href="/blog/">← All posts</a></p>
+
+      {related.length > 0 && (
+        <aside aria-label="More from the blog">
+          <p class="eyebrow">More from the blog</p>
+          <ul style="list-style:none; margin:0 0 28px; padding:0; display:grid; gap:10px;">
+            {related.map((r) => (
+              <li>
+                <a href={`/blog/${r.slug}/`} style="font-weight:600; text-decoration:none;">{r.title}</a>
+                <p class="muted" style="margin:2px 0 0; font-size:0.92rem;">{r.summary}</p>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      <p class="muted">
+        <a href="/blog/">← All posts</a> ·
+        StockReclaim finds refunded items that never made it back to your shelf.
+        <a href="/pricing/">See plans</a>.
+      </p>
     </div>
   </section>
 </Base>

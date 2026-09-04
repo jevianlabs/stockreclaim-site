@@ -1,13 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
+import { getPosts, fmtDate } from "../lib/blog";
+import { organizationLd, websiteLd, softwareLd } from "../lib/seo";
 import DashboardMock from "../components/DashboardMock.astro";
 import HeroAnimation from "../components/HeroAnimation.astro";
 import { site } from "../site.config";
 const installUrl = site.appStoreUrl || site.waitlistUrl;
+const latestPosts = (await getPosts()).slice(0, 3);
 const installLabel = site.appStoreUrl ? "Install on Shopify" : "Request a free scan";
 ---
 
-<Base>
+<Base jsonLd={[organizationLd, websiteLd, softwareLd]}>
   <!-- HERO -->
   <section class="hero on-teal">
     <div class="wrap">
@@ -183,6 +186,25 @@ const installLabel = site.appStoreUrl ? "Install on Shopify" : "Request a free s
       </div>
     </div>
   </section>
+
+  {latestPosts.length > 0 && (
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">From the blog</p>
+        <h2>Plain writing on returns and restocking.</h2>
+        <div class="grid grid-3" style="margin-top:20px;">
+          {latestPosts.map((p) => (
+            <a class="card" href={`/blog/${p.slug}/`} style="text-decoration:none; display:block;">
+              <time class="muted num" style="font-size:0.85rem;" datetime={p.publishedAt}>{fmtDate(p.publishedAt)}</time>
+              <h3 style="margin:8px 0 6px;">{p.title}</h3>
+              <p class="muted" style="margin:0; font-size:0.95rem;">{p.summary}</p>
+            </a>
+          ))}
+        </div>
+        <p style="margin-top:20px;"><a href="/blog/">All posts →</a></p>
+      </div>
+    </section>
+  )}
 
   <!-- FINAL CTA -->
   <section>
