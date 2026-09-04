@@ -1,0 +1,245 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../site.config";
+---
+
+<Legal
+  title="Privacy policy"
+  summary="What StockReclaim collects, why, where it is kept, who can see it, and how to have it removed."
+  updated={new Date("2026-09-05")}
+>
+  <h2>1. Who we are</h2>
+  <p>
+    StockReclaim is operated by <strong>Gandhi Polymers</strong>, a sole
+    proprietorship registered in India (proprietor: Ankita Bhandiya), trading as
+    StockReclaim. In this policy "we", "us" and "our" mean Gandhi Polymers.
+    "Jevian Labs" is the development name you may see in the Shopify Partner
+    directory; it refers to the same business.
+  </p>
+  <p>
+    You can reach us about anything in this policy at
+    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+  </p>
+
+  <h2>2. What this policy covers</h2>
+  <p>This policy applies to:</p>
+  <ul>
+    <li>the <strong>StockReclaim app</strong> installed from the Shopify App Store into a merchant's Shopify admin (the "App");</li>
+    <li>this website, <strong>stockreclaim.com</strong> (the "Site"), including the help centre, blog, changelog, support and feature-request pages;</li>
+    <li>the emails the App sends on a merchant's behalf (the weekly digest, the monthly reconciliation packet, product announcements and support replies).</li>
+  </ul>
+  <p>
+    It does not cover Shopify itself. Shopify's handling of your store and your
+    customers' data is governed by
+    <a href="https://www.shopify.com/legal/privacy" rel="noopener">Shopify's privacy policy</a>.
+  </p>
+
+  <h2>3. The short version</h2>
+  <ul>
+    <li>The App reads your refunds and returns <strong>live</strong> from Shopify to find stock that never came back. It does not copy your products, orders, refunds or inventory into our systems.</li>
+    <li>We do <strong>not</strong> request, receive or store your customers' names, email addresses, phone numbers or addresses.</li>
+    <li>We keep only what the App needs to work: a rebuildable cache of your last scan, the decisions you make on exceptions, the settings you enter, and the messages you send us.</li>
+    <li>When you uninstall, everything we hold for your store is deleted and the deletion is verified.</li>
+    <li>We do not sell data, run advertising, or use analytics cookies on this Site.</li>
+  </ul>
+
+  <h2>4. Information we collect</h2>
+
+  <h3>4.1 From Shopify, when you install the App</h3>
+  <ul>
+    <li><strong>Store identity</strong> — your store's <code>myshopify.com</code> domain, timezone and currency, and the date you installed.</li>
+    <li><strong>Access token</strong> — the credential Shopify issues so the App can read your store. It is encrypted at rest and used only to make the API calls described below.</li>
+    <li><strong>Installing user details</strong> — where Shopify passes them during installation, the name and email address of the staff account that installed the App. We use these only to identify the installation and to answer support requests.</li>
+  </ul>
+
+  <h3>4.2 Store data the App reads to run the audit</h3>
+  <p>
+    With the permissions you grant at install (<code>read_products</code>,
+    <code>read_inventory</code>, <code>read_locations</code>, <code>read_orders</code>,
+    <code>read_returns</code> and <code>write_inventory</code>), the App reads:
+  </p>
+  <ul>
+    <li>orders from the last 60 days (or a longer window if Shopify has granted the App access to older orders), including their refunds, refund line items and whether each refunded item was marked for restock;</li>
+    <li>returns and their dispositions (for example restocked, not restocked, missing);</li>
+    <li>products and variants (title and SKU), inventory levels and locations.</li>
+  </ul>
+  <p>
+    This data is read during a scan and used to compute your figure. <strong>It is
+    not retained</strong>, with the specific exceptions in §4.3.
+  </p>
+  <p>
+    StockReclaim is declared to Shopify for <em>store management</em> use and requests
+    <strong>none</strong> of Shopify's optional protected customer fields. Shopify
+    therefore does not provide your customers' names, email addresses, phone numbers
+    or addresses to the App, and we do not store them.
+  </p>
+
+  <h3>4.3 What the App stores for your store</h3>
+  <ul>
+    <li><strong>Scan cache</strong> — the result of your most recent scan: order numbers, SKUs, product titles, quantities, amounts, the cause assigned to each case and its age. Kept so the dashboard loads instantly; rebuilt on every scan; deleted on uninstall.</li>
+    <li><strong>Restock claims and last-seen inventory levels</strong> — for the "restock recorded, stock unchanged" check: the order number, SKU, product title, refund reference, quantity and amount of each claimed restock, and the last inventory level seen per item and location. No inventory history and no copy of your catalogue is kept.</li>
+    <li><strong>Your decisions</strong> — each case you mark resolved, write off or restock, with the order number, SKU, amount, the date and any note you type.</li>
+    <li><strong>Settings</strong> — age thresholds, the locations you include, whether the weekly digest and monthly packet are enabled, the day they send, and the email addresses you enter as recipients (for example your bookkeeper's).</li>
+    <li><strong>Plan and lifecycle</strong> — which plan your store is on, install and uninstall dates, and a de-duplication log of the webhooks Shopify has sent us.</li>
+  </ul>
+
+  <h3>4.4 Support tickets and feature requests</h3>
+  <p>
+    When you open a support ticket in the App we store the subject, your messages,
+    our replies and any screenshots you attach. When you submit a feature request in
+    the App or on the Site we store the title, description, category and the email
+    address you optionally provide. Support tickets are linked to your store; a
+    feature request from the Site is linked only to the email you give, if any.
+  </p>
+
+  <h3>4.5 The Site</h3>
+  <p>
+    The Site is static. It sets <strong>no cookies</strong> and uses <strong>no
+    analytics or tracking scripts</strong>. Our hosting provider records standard
+    server logs (IP address, requested page, browser type, timestamp) for security
+    and capacity purposes.
+  </p>
+
+  <h3>4.6 Technical and operational data</h3>
+  <ul>
+    <li><strong>Application logs</strong> — request metadata, timestamps and your store domain, used to operate and debug the App.</li>
+    <li><strong>Error reports</strong> — when something fails, an error report is sent to our monitoring service with the store domain and technical context. Personal identifiers are disabled in that reporting.</li>
+    <li><strong>Internal notifications</strong> — new installs, uninstalls and new support tickets generate a short internal notice to the founder (store domain and ticket subject) so we can respond quickly.</li>
+  </ul>
+
+  <h2>5. How we use information</h2>
+  <ul>
+    <li>to run the audit, show you the results and let you act on them (the App's core function);</li>
+    <li>to send the emails you enable — the weekly digest and the monthly reconciliation packet — to the recipients you specify;</li>
+    <li>to tell you about material changes to the App or these terms (in-app announcement and, where appropriate, email);</li>
+    <li>to answer support requests and consider feature requests;</li>
+    <li>to keep the App secure, prevent abuse, and meet our obligations to Shopify;</li>
+    <li>to understand, in aggregate and without identifying stores, how the App is used so we can improve it.</li>
+  </ul>
+  <p>
+    We do not sell personal information, do not share it for advertising, and do
+    not use automated decision-making that produces legal or similarly significant
+    effects on individuals.
+  </p>
+
+  <h2>6. Legal bases (EEA, UK and similar jurisdictions)</h2>
+  <ul>
+    <li><strong>Performance of a contract</strong> — providing the App you installed and the plan you chose.</li>
+    <li><strong>Legitimate interests</strong> — securing and improving the App, answering support, preventing abuse. We balance these against your interests and rights.</li>
+    <li><strong>Consent</strong> — optional emails and recipients you enable in Settings; you can withdraw by turning them off.</li>
+    <li><strong>Legal obligation</strong> — where we must keep or disclose information by law.</li>
+  </ul>
+
+  <h2>7. Who we share information with</h2>
+  <p>
+    We use a small number of service providers to run StockReclaim. Each processes
+    data only on our instructions and only to the extent needed for its service:
+  </p>
+  <table>
+    <thead>
+      <tr><th>Provider</th><th>Purpose</th><th>What it handles</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Shopify</td><td>The platform the App runs on, and billing</td><td>All App traffic passes through Shopify's APIs; Shopify bills your plan</td></tr>
+      <tr><td>Fly.io</td><td>Application hosting (United States)</td><td>The App's servers, logs and background jobs</td></tr>
+      <tr><td>Supabase</td><td>Managed PostgreSQL database</td><td>Everything listed in §4.3 and §4.4</td></tr>
+      <tr><td>Resend</td><td>Transactional email delivery</td><td>Digest, packet, announcement and support emails, including recipient addresses and attachments</td></tr>
+      <tr><td>Sentry</td><td>Error monitoring</td><td>Error reports with store domain and technical context; personal identifiers disabled</td></tr>
+      <tr><td>Telegram</td><td>Internal operational alerts to the founder</td><td>Store domain and support-ticket subject lines only</td></tr>
+      <tr><td>Hostinger</td><td>Hosting for this Site</td><td>Standard web-server logs</td></tr>
+    </tbody>
+  </table>
+  <p>
+    We may also disclose information if required by law or a valid legal process,
+    to protect the rights, safety or property of merchants, the public or
+    ourselves, or as part of a merger, acquisition or sale of the business (in
+    which case this policy continues to apply to the transferred data).
+  </p>
+
+  <h2>8. International transfers</h2>
+  <p>
+    We operate from India. The App and its database are hosted by providers in the
+    United States. If you are in the EEA, the United Kingdom or another jurisdiction
+    with data-transfer rules, your information is transferred to and processed in
+    those countries. Where required, we rely on appropriate safeguards such as the
+    standard contractual clauses in our providers' data-processing terms.
+  </p>
+
+  <h2>9. How long we keep information</h2>
+  <ul>
+    <li><strong>While the App is installed</strong> — we keep the data in §4.1–4.4 so the App can work. The scan cache is overwritten on every scan.</li>
+    <li><strong>When you uninstall</strong> — Shopify notifies us, and 48 hours later sends a <code>shop/redact</code> request. On that request we delete your sessions and access token, your store record, the scan cache, restock claims, last-seen inventory levels, your decisions, your settings, your support tickets (including attachments) and any feature requests linked to your store — and we read the database back to confirm nothing remains. If you reinstall within those 48 hours, your decisions and settings are kept.</li>
+    <li><strong>Feature requests submitted on the Site</strong> — kept while they are open or shipped; deleted on request to the email below.</li>
+    <li><strong>Logs and error reports</strong> — retained for up to 90 days, then deleted automatically.</li>
+    <li><strong>Emails we have sent</strong> — delivery records are kept by our email provider for a limited period for deliverability and abuse prevention.</li>
+  </ul>
+
+  <h2>10. Your customers' data</h2>
+  <p>
+    When the App processes information about your customers' orders, we act as
+    your <strong>processor</strong> (or "service provider") and you are the
+    <strong>controller</strong>. We process that data only to provide the App to
+    you, and we hold no customer personal identifiers (see §4.2). Shopify's
+    mandatory privacy webhooks are honoured automatically: a
+    <code>customers/data_request</code> or <code>customers/redact</code> request is
+    answered with the fact that we hold no personal data for that customer, and a
+    <code>shop/redact</code> request triggers the deletion described in §9. If one of
+    your customers contacts us directly, we will refer them to you.
+  </p>
+
+  <h2>11. Security</h2>
+  <ul>
+    <li>All traffic between Shopify, the App, the Site and your browser is encrypted (TLS).</li>
+    <li>Shopify access tokens are encrypted at rest.</li>
+    <li>Every webhook from Shopify is verified with its HMAC signature before it is processed.</li>
+    <li>Database access is scoped per store (row-level security), so one store's data cannot be read in the context of another.</li>
+    <li>The App requests the minimum permissions it needs, and no customer personal fields.</li>
+    <li>The App writes to your store in exactly one case: when you click <strong>Restock now</strong> on a specific exception. The audit itself never writes.</li>
+  </ul>
+  <p>
+    No system is perfectly secure. If we become aware of a breach affecting your
+    data we will notify you and the relevant authorities as required by law.
+  </p>
+
+  <h2>12. Your rights</h2>
+  <p>
+    Depending on where you are, you may have the right to access, correct, delete,
+    restrict or object to our processing of your personal information, to receive a
+    copy of it in a portable format, and to withdraw consent where processing is
+    based on consent. Residents of California and certain other US states have
+    equivalent rights under their state privacy laws; we do not sell or share
+    personal information as those laws define it.
+  </p>
+  <p>
+    To exercise any of these rights, email
+    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> from the address
+    associated with your store. We will respond within the time required by
+    applicable law. Uninstalling the App is the fastest way to have everything we
+    hold for your store deleted (§9). You also have the right to lodge a complaint
+    with your local data-protection authority.
+  </p>
+
+  <h2>13. Children</h2>
+  <p>
+    StockReclaim is a business tool for Shopify merchants. It is not directed at,
+    and we do not knowingly collect information from, anyone under 18.
+  </p>
+
+  <h2>14. Changes to this policy</h2>
+  <p>
+    We will post any changes on this page and update the effective date above. For
+    material changes we will also notify installed stores through an in-app
+    announcement and, where we have an address for you, by email. Continued use of
+    the App after a change takes effect means you accept the updated policy.
+  </p>
+
+  <h2>15. Contact</h2>
+  <p>
+    Gandhi Polymers, trading as StockReclaim (India).<br />
+    Email: <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>
+  </p>
+  <p>
+    A plain-language summary of what the App reads and stores is also in the help
+    centre: <a href="/help/data-and-privacy/">Data and privacy</a>.
+  </p>
+</Legal>

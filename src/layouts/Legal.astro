@@ -1,0 +1,40 @@
+---
+/**
+ * Layout for the legal pages (/privacy/, /terms/). Same narrow prose column as
+ * a help article, without the help-centre breadcrumb, plus an "effective from"
+ * line and a contact footer. Keep these pages plain: no eyebrow colour, no
+ * brass, nothing that reads as marketing.
+ */
+import Base from "./Base.astro";
+import { site } from "../site.config";
+
+interface Props {
+  title: string;
+  summary: string;
+  updated: Date;
+}
+const { title, summary, updated } = Astro.props;
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<Base title={title} description={summary}>
+  <section style="padding-top:40px;">
+    <div class="wrap narrow">
+      <p class="muted" style="font-size:0.9rem; margin-bottom:12px;">Legal</p>
+      <h1>{title}</h1>
+      <p class="muted" style="font-size:1.1rem;">{summary}</p>
+      <p class="muted" style="font-size:0.9rem;">Effective {fmt(updated)}.</p>
+      <article class="prose" style="margin-top:28px;">
+        <slot />
+      </article>
+      <hr style="margin:40px 0; border:none; border-top:1px solid var(--sr-line);" />
+      <p class="muted">
+        Questions about this document? Email
+        <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+        See also our <a href="/privacy/">Privacy policy</a> and
+        <a href="/terms/">Terms of service</a>.
+      </p>
+    </div>
+  </section>
+</Base>

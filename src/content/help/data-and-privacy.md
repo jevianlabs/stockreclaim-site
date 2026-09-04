@@ -47,3 +47,8 @@ GDPR requests (customer and shop redaction) are honored automatically.
 
 StockReclaim is declared for **store management** use and requests **none** of the
 optional personal-data fields. It works entirely from order and returns metadata.
+
+## The full policy
+
+This page is the plain-language summary. The complete legal documents are the
+[Privacy policy](/privacy/) and the [Terms of service](/terms/).

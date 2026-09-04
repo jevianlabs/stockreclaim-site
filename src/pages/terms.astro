@@ -1,0 +1,174 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../site.config";
+---
+
+<Legal
+  title="Terms of service"
+  summary="The agreement between you and StockReclaim when you install the app or use this site."
+  updated={new Date("2026-09-05")}
+>
+  <h2>1. Who you are agreeing with</h2>
+  <p>
+    These terms are a contract between you and <strong>Gandhi Polymers</strong>, a
+    sole proprietorship registered in India (proprietor: Ankita Bhandiya), trading as
+    StockReclaim ("StockReclaim", "we", "us"). "You" means the business that installs
+    the StockReclaim app (the "App") into its Shopify store, or that uses this website
+    (the "Site"), and the person acting on that business's behalf.
+  </p>
+  <p>
+    By installing the App, or by using the Site, you agree to these terms and to our
+    <a href="/privacy/">Privacy policy</a>. If you do not agree, do not install or use
+    them. If you are acting for a business, you confirm you have authority to bind it.
+  </p>
+
+  <h2>2. What StockReclaim does — and does not do</h2>
+  <p>
+    The App audits your Shopify refunds and returns and lists the units that were
+    refunded or returned but never put back into sellable inventory, with an age and
+    a value for each case. It lets you mark a case resolved, write it off, or put the
+    units back into inventory with <strong>Restock now</strong>. Depending on your
+    plan it also sends a weekly digest email and a monthly reconciliation PDF.
+  </p>
+  <p>Please understand its limits:</p>
+  <ul>
+    <li><strong>It audits returns; it does not manage them.</strong> It is not a returns portal, does not create labels and does not communicate with your customers.</li>
+    <li><strong>It cannot see your shelf.</strong> The App reports where Shopify's records disagree with each other. It never asserts a physical count, and a case it lists is an indicator to check, not a proven loss.</li>
+    <li><strong>Its findings depend on Shopify's data.</strong> Missing, delayed or incorrect data in your store produces missing or incorrect findings.</li>
+    <li><strong>It is not accounting, tax or legal advice.</strong> Figures shown are working estimates from your order data; decide with your own records and advisers.</li>
+    <li><strong>Restock now changes your inventory.</strong> It runs only when you click it on a specific case, and it does what the confirmation says. You are responsible for checking the case before you confirm.</li>
+  </ul>
+
+  <h2>3. Eligibility and your account</h2>
+  <ul>
+    <li>The App is for businesses using Shopify. You must have a Shopify store in good standing and comply with Shopify's own terms.</li>
+    <li>You are responsible for everyone who accesses the App through your store's staff accounts, and for keeping those accounts secure.</li>
+    <li>You must be at least 18 and able to enter a binding contract.</li>
+  </ul>
+
+  <h2>4. Plans, trials and billing</h2>
+  <ul>
+    <li><strong>Plans.</strong> The App offers a free plan and paid plans. What each plan includes, and its price, is shown on the App's Shopify App Store listing and on our <a href="/pricing/">pricing page</a>. Prices are in US dollars unless Shopify shows otherwise.</li>
+    <li><strong>Billing is by Shopify.</strong> Paid plans are charged through Shopify's app billing and appear on your Shopify invoice. Shopify's billing terms, proration on plan changes and applicable taxes apply. We never see or store your payment details.</li>
+    <li><strong>Free trial.</strong> Where a paid plan offers a free trial, it starts when you select the plan and runs for the number of days shown. Shopify limits trials per store, so uninstalling and reinstalling does not restart a trial. When the trial ends you are charged for the plan unless you downgrade or uninstall first.</li>
+    <li><strong>Changing plans.</strong> You can upgrade or downgrade at any time from the App's Settings page, without contacting us. Changes take effect as Shopify applies them.</li>
+    <li><strong>Price changes.</strong> We may change prices or what a plan includes. For stores already on a paid plan we will give at least 30 days' notice, in the App and by email where we have an address, before a change applies to you.</li>
+    <li><strong>Free plan.</strong> The free plan is limited as described on the listing, and we may change those limits with notice.</li>
+  </ul>
+
+  <h2>5. Refunds and cancellation</h2>
+  <ul>
+    <li>You can stop paying at any time by downgrading to the free plan or uninstalling the App. Access to paid features continues until the end of the period Shopify has already billed.</li>
+    <li>Charges are <strong>non-refundable</strong> except where the law requires otherwise. That said, we are a small business and want to be fair: if something went wrong — a charge you did not expect, a plan that did not do what the listing said — email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> and we will consider genuine cases. Any refund is issued through Shopify.</li>
+  </ul>
+
+  <h2>6. Your data and the permissions you grant</h2>
+  <ul>
+    <li>When you install the App you grant it the Shopify permissions shown on the install screen. We use them only as described in the <a href="/privacy/">Privacy policy</a>: to read your refunds, returns, products, inventory and locations for the audit, and to adjust inventory when — and only when — you click Restock now.</li>
+    <li>Your store data stays yours. We claim no ownership of it, and we do not sell it or use it for advertising.</li>
+    <li>You are the controller of your customers' personal data; we process it on your behalf and hold no customer personal identifiers. You are responsible for your own privacy notices to your customers.</li>
+    <li>You are responsible for the accuracy of the settings and email addresses you enter, including any recipient (for example your bookkeeper) you choose to send the monthly packet to.</li>
+  </ul>
+
+  <h2>7. Acceptable use</h2>
+  <p>You agree not to:</p>
+  <ul>
+    <li>use the App or Site for anything unlawful, or in breach of Shopify's terms;</li>
+    <li>reverse-engineer, copy, resell, sublicense or build a competing service from the App;</li>
+    <li>probe, scan or overload our systems, or bypass plan limits, rate limits or security measures;</li>
+    <li>submit support tickets or feature requests that are abusive, or that contain data you do not have the right to share;</li>
+    <li>use the App on a store you are not authorised to administer.</li>
+  </ul>
+
+  <h2>8. Intellectual property</h2>
+  <p>
+    The App, the Site, their code, design, text and the StockReclaim name and mark
+    belong to us or our licensors and are protected by law. We grant you a limited,
+    non-exclusive, non-transferable licence to use the App with your Shopify store
+    for as long as these terms are in force. If you send us feedback or a feature
+    request, you allow us to use it without obligation to you.
+  </p>
+
+  <h2>9. Shopify and other third parties</h2>
+  <p>
+    The App runs on Shopify's platform and depends on Shopify's APIs, billing and
+    App Store. We are not responsible for Shopify's availability, changes to its
+    APIs or policies, or its handling of your data. Nothing in these terms limits
+    your agreement with Shopify.
+  </p>
+
+  <h2>10. Availability, support and changes</h2>
+  <ul>
+    <li>We work to keep the App available and accurate, but we do not promise uninterrupted or error-free operation. Scans may be delayed while Shopify rate limits apply.</li>
+    <li>Support is by email at <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> and through the App's Support page. We aim to reply within one business day but do not guarantee response times.</li>
+    <li>We may add, change or remove features. If we remove a feature from a paid plan we will give notice, and where it materially reduces what you paid for, you may downgrade or cancel.</li>
+  </ul>
+
+  <h2>11. Disclaimers</h2>
+  <p>
+    To the fullest extent permitted by law, the App and Site are provided <strong>"as
+    is" and "as available"</strong>, without warranties of any kind, express or
+    implied, including fitness for a particular purpose, merchantability and
+    non-infringement. We do not warrant that the App will find every unrecovered
+    unit, that any figure it shows is complete or exact, or that using it will
+    recover any particular amount of stock or money.
+  </p>
+
+  <h2>12. Limitation of liability</h2>
+  <p>
+    To the fullest extent permitted by law: (a) we are not liable for any indirect,
+    incidental, special, consequential or punitive damages, or for lost profits,
+    revenue, data or goodwill, arising from or related to the App, the Site or these
+    terms; and (b) our total liability for all claims in any twelve-month period is
+    limited to the amount you paid us for the App in the twelve months before the
+    event giving rise to the claim, or USD 100 if you paid nothing. Nothing in these
+    terms excludes liability that cannot be excluded by law, including for fraud.
+  </p>
+
+  <h2>13. Indemnity</h2>
+  <p>
+    You will indemnify us against claims, losses and costs (including reasonable
+    legal fees) arising from your breach of these terms, your misuse of the App, or
+    your violation of any law or of a third party's rights, including your own
+    customers' privacy rights.
+  </p>
+
+  <h2>14. Termination</h2>
+  <ul>
+    <li><strong>By you:</strong> uninstall the App at any time. That ends these terms for the App, subject to any period already billed.</li>
+    <li><strong>By us:</strong> we may suspend or end your access if you breach these terms, if Shopify requires it, if a charge is not paid, or if we discontinue the App (with reasonable notice in that case).</li>
+    <li><strong>Effect:</strong> your data is deleted as described in the <a href="/privacy/">Privacy policy</a> (§9). Sections 8 and 11–17 survive termination.</li>
+  </ul>
+
+  <h2>15. Changes to these terms</h2>
+  <p>
+    We may update these terms. We will post the new version here with a new
+    effective date and, for material changes, notify installed stores in the App and
+    by email where we have an address. Continued use after the effective date means
+    you accept the change. If you do not, uninstall the App.
+  </p>
+
+  <h2>16. Governing law and disputes</h2>
+  <p>
+    These terms are governed by the laws of <strong>India</strong>. Any dispute
+    arising from them, the App or the Site is subject to the exclusive jurisdiction
+    of the courts at <strong>Udaipur, Rajasthan, India</strong>. Before starting a
+    claim, please email us — most problems can be sorted out quickly by talking.
+  </p>
+
+  <h2>17. General</h2>
+  <ul>
+    <li>These terms and the Privacy policy are the entire agreement between us about the App and Site.</li>
+    <li>If any part is found unenforceable, the rest continues to apply.</li>
+    <li>You may not assign these terms without our consent; we may assign them as part of a transfer of the business.</li>
+    <li>Our not enforcing a term is not a waiver of it.</li>
+    <li>Neither party is liable for delay or failure caused by events beyond its reasonable control.</li>
+    <li>Notices to you are given in the App or to the email address associated with your store; notices to us go to the email below.</li>
+  </ul>
+
+  <h2>18. Contact</h2>
+  <p>
+    Gandhi Polymers, trading as StockReclaim (India).<br />
+    Email: <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>
+  </p>
+</Legal>
