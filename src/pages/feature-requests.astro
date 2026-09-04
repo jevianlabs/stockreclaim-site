@@ -79,14 +79,15 @@ const endpoint = `${site.apiBase}/api/feature-request`;
       e.preventDefault();
       status.textContent = "";
       status.style.color = "var(--sr-muted)";
-      const data = Object.fromEntries(new FormData(form).entries());
       submit.disabled = true;
       submit.textContent = "Submitting…";
       try {
+        // Send as application/x-www-form-urlencoded (a CORS "simple" request):
+        // the browser skips the preflight, which the app's resource route can't
+        // answer with CORS headers. The POST response still carries them.
         const res = await fetch(endpoint, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: new URLSearchParams(new FormData(form)),
         });
         const json = await res.json().catch(() => ({}));
         if (res.ok && json.ok) {
