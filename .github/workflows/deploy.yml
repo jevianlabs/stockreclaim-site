@@ -1,8 +1,11 @@
-# Build the Astro site and publish the static output to the `deploy` branch.
-# Hostinger's Git deployment pulls that branch into public_html on a webhook.
+# Build the Astro site and upload the static output to Hostinger over FTPS.
 # Runs on every push to main, hourly (so blog posts published from the admin
 # appear within the hour), and on demand from the Actions tab.
-name: Build and publish
+#
+# Secrets required (Settings → Secrets and variables → Actions):
+#   FTP_PASSWORD  — password for the ghdeploy FTP account on Hostinger
+# Host and username are non-secret and set below.
+name: Build and deploy
 
 on:
   push:
@@ -11,15 +14,12 @@ on:
     - cron: "17 * * * *"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 concurrency:
   group: deploy
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,16 +30,18 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
+          SITE_URL: https://stockreclaim.com
           BLOG_FEED_URL: https://restock-radar-prod.fly.dev/blog/feed.json
-      - name: Publish dist/ to the deploy branch
-        run: |
-          cd dist
-          touch .nojekyll
-          git init -q -b deploy
-          git config user.name "stockreclaim-bot"
-          git config user.email "noreply@stockreclaim.com"
-          git add -A
-          git commit -q -m "site build $(date -u +%Y-%m-%dT%H:%MZ) from ${GITHUB_SHA::7}"
-          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload dist/ to Hostinger public_html
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 194.36.184.148
+          protocol: ftps
+          port: 21
+          username: u506525667.ghdeploy
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          # Keep files that aren't part of the build (e.g. anything uploaded
+          # directly on the host). Remove this line to mirror exactly.
+          dangerous-clean-slate: false
