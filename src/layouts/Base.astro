@@ -13,7 +13,7 @@ interface Props {
 
 const { title, description = site.tagline, ogImage } = Astro.props;
 const fullTitle = title ? `${title} · StockReclaim` : `StockReclaim — ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://getstockreclaim.com").href;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://stockreclaim.com").href;
 ---
 
 <!doctype html>

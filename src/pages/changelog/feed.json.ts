@@ -13,7 +13,7 @@ import { site } from "../../site.config";
  * latest entry's `banner` line — so a release is written once, here.
  */
 export const GET: APIRoute = async ({ site: astroSite }) => {
-  const base = (astroSite ?? new URL("https://getstockreclaim.com")).origin;
+  const base = (astroSite ?? new URL("https://stockreclaim.com")).origin;
   const entries = (await getCollection("changelog"))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .map((e) => ({

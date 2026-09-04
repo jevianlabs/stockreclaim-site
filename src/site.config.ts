@@ -10,9 +10,9 @@ export const site = {
   // the install CTAs point at the waitlist.
   appStoreUrl: "", // e.g. "https://apps.shopify.com/stockreclaim"
   // Where "Request a free scan" / "Join the waitlist" goes pre-launch.
-  waitlistUrl: "mailto:hello@getstockreclaim.com?subject=StockReclaim%20free%20scan",
-  supportEmail: "support@getstockreclaim.com",
-  helloEmail: "hello@getstockreclaim.com",
+  waitlistUrl: "mailto:hello@stockreclaim.com?subject=StockReclaim%20free%20scan",
+  supportEmail: "support@stockreclaim.com",
+  helloEmail: "hello@stockreclaim.com",
   // Feature-request board (hybrid decision: use a proven tool, don't build one).
   // Set ONE of these. Featurebase is the recommended default (free tier, embed +
   // hosted portal). Fider is the open-source self-host alternative.
