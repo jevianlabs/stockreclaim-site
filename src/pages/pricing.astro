@@ -5,7 +5,7 @@ import { faqLd, softwareLd } from "../lib/seo";
 const installUrl = site.appStoreUrl || site.waitlistUrl;
 
 const rows: { label: string; free: string; starter: string; growth: string }[] = [
-  { label: "60-day scan on install", free: "✓", starter: "✓", growth: "✓" },
+  { label: "Scan on install", free: "Last 60 days", starter: "Last 365 days", growth: "Last 365 days" },
   { label: "Headline dollar figure", free: "✓", starter: "✓", growth: "✓" },
   { label: "Split by rule, with counts", free: "✓", starter: "✓", growth: "✓" },
   { label: "Exception list", free: "Top 5 rows", starter: "Unlimited", growth: "Unlimited" },
@@ -16,7 +16,6 @@ const rows: { label: string; free: string; starter: string; growth: string }[] =
   { label: "CSV export", free: "—", starter: "✓", growth: "✓" },
   { label: "Weekly digest email", free: "—", starter: "✓", growth: "✓" },
   { label: "Re-scan", free: "Monthly, automatic", starter: "On demand", growth: "On demand" },
-  { label: "12-month history", free: "—", starter: "✓", growth: "✓" },
   { label: "Recovery ledger", free: "—", starter: "✓", growth: "✓" },
   { label: "Multi-location", free: "—", starter: "Single location", growth: "✓" },
   { label: "Rule D — restock claimed, stock unchanged", free: "—", starter: "—", growth: "✓" },
