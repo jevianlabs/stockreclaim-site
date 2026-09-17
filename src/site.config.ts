@@ -8,7 +8,7 @@ export const site = {
   tagline: "Find refunded items that never made it back to your shelf, and what they cost you.",
   // The Shopify App Store listing. Fill in once the app is listed; until then
   // the install CTAs point at the waitlist.
-  appStoreUrl: "", // e.g. "https://apps.shopify.com/stockreclaim"
+  appStoreUrl: "https://apps.shopify.com/stockreclaim",
   // Where "Request a free scan" / "Join the waitlist" goes pre-launch.
   waitlistUrl: "mailto:hello@stockreclaim.com?subject=StockReclaim%20free%20scan",
   // The embedded app's public API origin (feature-request endpoint lives here).
