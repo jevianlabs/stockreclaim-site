@@ -35,6 +35,9 @@ const origin = (Astro.site ?? new URL("https://stockreclaim.com")).href.replace(
 const canonical = `${origin}${Astro.url.pathname}`;
 const ogImageUrl = `${origin}${ogImage}`;
 const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+// Analytics only in a production build, so local dev never pollutes the
+// property. Empty id = no tag emitted at all.
+const gaId = import.meta.env.PROD ? site.gaMeasurementId : "";
 ---
 
 <!doctype html>
@@ -80,6 +83,18 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {ld.map((obj) => (
       <script type="application/ld+json" set:html={JSON.stringify(obj)} />
     ))}
+
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag("js", new Date());
+          gtag("config", gaId);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <a href="#main" class="btn" style="position:absolute;left:-9999px;top:8px;z-index:100;" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Skip to content</a>

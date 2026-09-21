@@ -15,6 +15,11 @@ export const site = {
   apiBase: "https://restock-radar-prod.fly.dev",
   supportEmail: "support@stockreclaim.com",
   helloEmail: "hello@stockreclaim.com",
+  // GA4 measurement ID. The SAME id goes into the Shopify App Store listing
+  // (Partner Dashboard -> Distribution -> listing -> "E. Tracking"), so site
+  // visits and listing views/installs land in one property and the whole
+  // chain (blog -> site -> listing -> install) is readable in one place.
+  gaMeasurementId: "G-3D6BKTM1R0",
   // Feature-request board (hybrid decision: use a proven tool, don't build one).
   // Set ONE of these. Featurebase is the recommended default (free tier, embed +
   // hosted portal). Fider is the open-source self-host alternative.
